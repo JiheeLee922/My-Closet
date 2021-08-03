@@ -12,6 +12,10 @@ spring:
     hibernate:
       format_sql: true
       ddl-auto: create
+      
+  mvc:
+    view:
+      suffix: .jsp      
 
 logging:
   level:
