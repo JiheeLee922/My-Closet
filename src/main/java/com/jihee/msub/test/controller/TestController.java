@@ -15,7 +15,7 @@ public class TestController {
 	
 	private TestService testService;
 	
-	@GetMapping("/")
+	@GetMapping("/list")
 	public String list() {
 		return "test/list";
 	}

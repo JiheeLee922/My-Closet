@@ -6,7 +6,7 @@ plugins {
 
 group = 'com.jihee'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = '8'
 
 configurations {
 	compileOnly {
@@ -16,20 +16,23 @@ configurations {
 
 repositories {
 	mavenCentral()
+	jcenter()
 }
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'junit:junit:4.12'
 	compileOnly 'org.projectlombok:lombok'
 	compileOnly 'javax.servlet:jstl:1.2'
 	compileOnly 'org.apache.tomcat.embed:tomcat-embed-jasper'
 	runtimeOnly 'mysql:mysql-connector-java'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.springframework.boot:spring-boot-starter-test'
 }
+
 
 test {
 	useJUnitPlatform()
