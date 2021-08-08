@@ -15,7 +15,8 @@ spring:
       
   mvc:
     view:
-      suffix: .jsp      
+      suffix: .jsp 
+      prefix: /WEB-INF/jsp/     
 
 logging:
   level:

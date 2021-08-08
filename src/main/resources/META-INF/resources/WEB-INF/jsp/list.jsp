@@ -14,6 +14,10 @@
 
 	<a href="/post">±Û¾²±â</a>
 	
-	<c:if test="1==1">asdsa</c:if>
+	<c:choose>
+	<c:when test="true">asdsa</c:when>
+	<c:otherwise>asdasd</c:otherwise>
+	
+	</c:choose>
 </body>
 </html>

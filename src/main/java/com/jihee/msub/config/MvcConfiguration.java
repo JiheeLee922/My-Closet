@@ -13,13 +13,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MvcConfiguration implements WebMvcConfigurer {
 
-	@Override
-	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-		log.debug("===========mvc Configuration =======" ); 
-		registry.addResourceHandler("/**")
-				.addResourceLocations("classpath:/templates/","classpath:/static/")
-				.setCacheControl(CacheControl.maxAge(10, TimeUnit.MINUTES));
-	}
-
-	
+	/*
+	 * @Override public void addResourceHandlers(final ResourceHandlerRegistry
+	 * registry) { log.debug("===========mvc Configuration =======" );
+	 * registry.addResourceHandler("/**")
+	 * .addResourceLocations("classpath:/templates/","classpath:/static/")
+	 * .setCacheControl(CacheControl.maxAge(10, TimeUnit.MINUTES)); }
+	 * 
+	 */
 }

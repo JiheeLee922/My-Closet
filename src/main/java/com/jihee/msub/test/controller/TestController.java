@@ -17,12 +17,12 @@ public class TestController {
 	
 	@GetMapping("/list")
 	public String list() {
-		return "test/list";
+		return "list";
 	}
 	
 	@GetMapping("/post")
     public String write() {
-        return "test/write"; 
+        return "write"; 
     }
 
 	@PostMapping("/post")
