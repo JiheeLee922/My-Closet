@@ -11,9 +11,10 @@ spring:
     show-sql: true
     hibernate:
       format_sql: true
-      ddl-auto: create
+      #ddl-auto: create
       
   mvc:
+    hiddenmethod:      filter:        enabled: true
     view:
       suffix: .jsp 
       prefix: /WEB-INF/views/     
