@@ -1,9 +1,9 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/jihee_sub?serverTimezone=UTC&characterEncoding=UTF-8
-    username: root
-    password: admin1234
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://springboot-webservice.cibzcslz3sbq.ap-northeast-2.rds.amazonaws.com:3306/springboot_webservice?serverTimezone=UTC&characterEncoding=UTF-8
+    username: jihee_sub
+    password: jihee_subspringboot
     
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
@@ -18,7 +18,8 @@ spring:
     view:
       suffix: .jsp 
       prefix: /WEB-INF/views/     
-
+sever:
+ port:8180
 logging:
   level:
     org:
