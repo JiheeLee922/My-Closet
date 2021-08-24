@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name="board")
+@Table(name="test")
 public class TestEntity extends TimeEntity{
 	@Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
