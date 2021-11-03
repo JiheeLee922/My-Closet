@@ -1,7 +1,9 @@
 package com.jihee.msub.login.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -14,6 +16,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 
 import com.jihee.msub.login.domain.Role;
 import com.jihee.msub.login.domain.entity.MemberEntity;
@@ -54,6 +58,18 @@ public class MemberSerivce implements UserDetailsService{
 		
 		//SpringSecurity에서 제공하는 UserDetails를 구현한 User 객체 반환. 
 		return new User(userEntity.getEmail(), userEntity.getPassword(), authorities);
+	}
+	
+	
+	public Map<String,String> validateHandling (Errors errors){
+		Map<String,String> validatorResult = new HashMap<>();
+		
+		for(FieldError error : errors.getFieldErrors()) {
+			String validKeyName = String.format("valid_%s", error.getField());
+			validatorResult.put(validKeyName, error.getDefaultMessage());
+		}
+		
+		return validatorResult;
 	}
 	
 	

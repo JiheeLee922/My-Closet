@@ -20,6 +20,7 @@
     </sec:authorize>
     <sec:authorize access="hasRole('ROLE_MEMBER')">
 	    <a  href="/user/info">내정보</a>
+	    <a  href="/board/list">게시판</a>
     </sec:authorize>
     <sec:authorize access="hasRole('ROLE_ADMIN')">
 	    <a  href="/admin">어드민</a>

@@ -1,8 +1,13 @@
 package com.jihee.msub.member.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -29,7 +34,19 @@ public class MemberController {
 	}
 	
 	@PostMapping("/user/signup")
-	public String execSignup( MemberDto memberDto) {
+	public String execSignup(@Valid MemberDto memberDto, Errors errors, Model model) {
+		if(errors.hasErrors()) {
+			//회원가입 유효성 실패 시, 입력 데이터 유지
+			model.addAttribute("userDto", memberDto);
+			
+			//유효성 실패 핸들링
+			Map<String, String> validatorResult = memberService.validateHandling(errors);
+			for(String key : validatorResult.keySet()) {
+				model.addAttribute(key, validatorResult.get(key));
+			}
+			
+			return "/member/signup";
+		}
 		memberService.joinUser(memberDto);
 		return "redirect:/user/login";
 	}

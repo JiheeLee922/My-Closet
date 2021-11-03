@@ -14,6 +14,7 @@
 <body>
 
 <a href="/board/post">글쓰기</a>
+<a href="/">메인</a>
 
 <table>
     <thead>
