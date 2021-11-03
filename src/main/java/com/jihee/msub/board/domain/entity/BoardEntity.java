@@ -1,4 +1,4 @@
-package com.jihee.msub.test.domain.entity;
+package com.jihee.msub.board.domain.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,8 +15,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name="test")
-public class TestEntity extends TimeEntity{
+@Table(name="board")
+public class BoardEntity extends TimeEntity{
 	@Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
@@ -31,7 +31,7 @@ public class TestEntity extends TimeEntity{
     private String content;
 
     @Builder
-    public TestEntity(Long id, String title, String content, String writer) {
+    public BoardEntity(Long id, String title, String content, String writer) {
         this.id = id;
         this.writer = writer;
         this.title = title;

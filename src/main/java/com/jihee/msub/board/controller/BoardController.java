@@ -1,4 +1,4 @@
-package com.jihee.msub.test.controller;
+package com.jihee.msub.board.controller;
 
 import java.util.List;
 
@@ -11,64 +11,64 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.jihee.msub.test.dto.TestDto;
-import com.jihee.msub.test.service.TestService;
+import com.jihee.msub.board.dto.BoardDto;
+import com.jihee.msub.board.service.BoardService;
 
 import lombok.AllArgsConstructor;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping(value = "test")
-public class TestController {
+@RequestMapping(value = "board")
+public class BoardController {
 	
-	private TestService testService;
+	private BoardService boardService;
 	
 	@GetMapping("/list")
 	public String list(Model model ) {
-		List<TestDto> boardList = testService.getBoardList();
+		List<BoardDto> boardList = boardService.getBoardList();
 		
 		model.addAttribute("boardList",boardList);
-		return "test/list";
+		return "board/list";
 	}
 	
 	@GetMapping("/post")
     public String write() {
-        return "test/write"; 
+        return "board/write"; 
     }
 
 	@PostMapping("/post")
-	public String write(TestDto testDto) {
-		testService.savePost(testDto);
-		return "redirect:/test/list"; 
+	public String write(BoardDto boardDto) {
+		boardService.savePost(boardDto);
+		return "redirect:/board/list"; 
 	}
 	
 	@GetMapping("/post/{no}")
     public String detail(@PathVariable("no") Long no, Model model) {
-        TestDto boardDTO = testService.getPost(no);
+        BoardDto boardDTO = boardService.getPost(no);
 
         model.addAttribute("boardDto", boardDTO);
-        return "test/detail";
+        return "board/detail";
     }
 
     @GetMapping("/post/edit/{no}")
     public String edit(@PathVariable("no") Long no, Model model) {
-        TestDto boardDTO = testService.getPost(no);
+        BoardDto boardDTO = boardService.getPost(no);
 
         model.addAttribute("boardDto", boardDTO);
-        return "test/update";
+        return "board/update";
     }
 
     @PutMapping("/post/edit/{no}")
-    public String update(TestDto boardDTO) {
-        testService.savePost(boardDTO);
+    public String update(BoardDto boardDTO) {
+    	boardService.savePost(boardDTO);
 
-        return "redirect:/test/list";
+        return "redirect:/board/list";
     }
 
     @DeleteMapping("/post/{no}")
     public String delete(@PathVariable("no") Long no) {
-        testService.deletePost(no);
+    	boardService.deletePost(no);
 
-        return "redirect:/test/list";
+        return "redirect:/board/list";
     }
 }

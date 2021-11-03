@@ -1,4 +1,4 @@
-package com.jihee.msub.test.domain.entity;
+package com.jihee.msub.board.domain.entity;
 
 import java.time.LocalDateTime;
 

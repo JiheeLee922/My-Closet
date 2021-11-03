@@ -1,8 +1,8 @@
-package com.jihee.msub.test.dto;
+package com.jihee.msub.board.dto;
 
 import java.time.LocalDateTime;
 
-import com.jihee.msub.test.domain.entity.TestEntity;
+import com.jihee.msub.board.domain.entity.BoardEntity;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -14,7 +14,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class TestDto {
+public class BoardDto {
 
 	private Long id;
     private String writer;
@@ -23,18 +23,18 @@ public class TestDto {
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
     
-    public TestEntity toEntity() {
-    	TestEntity testEntity = TestEntity.builder()
+    public BoardEntity toEntity() {
+    	BoardEntity boardEntity = BoardEntity.builder()
     			.id(id)
     			.writer(writer)
     			.title(title)
     			.content(content)
     			.build();
-    	return testEntity;
+    	return boardEntity;
     }
     
     @Builder
-    public TestDto(Long id, String title, String content, String writer, LocalDateTime createdDate, LocalDateTime modifiedDate) {
+    public BoardDto(Long id, String title, String content, String writer, LocalDateTime createdDate, LocalDateTime modifiedDate) {
     	this.id = id;
 		this.writer = writer;
 		this.title = title;

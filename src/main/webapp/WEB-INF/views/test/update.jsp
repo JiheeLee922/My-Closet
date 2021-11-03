@@ -7,7 +7,7 @@
     <title>Title</title>
 </head>
 <body>
-<form action="/test/post/edit/${boardDto.id}" method="post">
+<form action="/board/post/edit/${boardDto.id}" method="post">
     <input type="hidden" name="_method" value="put"/>
     <input type="hidden" name="id" value="${boardDto.id}"/>
 

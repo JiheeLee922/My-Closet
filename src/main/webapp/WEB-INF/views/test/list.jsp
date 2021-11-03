@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<a href="/test/post">글쓰기</a>
+<a href="/board/post">글쓰기</a>
 
 <table>
     <thead>
@@ -33,7 +33,7 @@
 	            <span>${board.id}</span>
 	        </td>
 	        <td>
-	            <a href="/test/post/${board.id}">
+	            <a href="/board/post/${board.id}">
 	                <span>${board.title}</span>
 	            </a>
 	        </td>

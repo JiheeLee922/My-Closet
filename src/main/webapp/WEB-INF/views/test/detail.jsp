@@ -15,11 +15,11 @@
 
 <!-- 수정/삭제 -->
 <div>
-    <a href="/test/post/edit/${boardDto.id}">
+    <a href="/board/post/edit/${boardDto.id}">
         <button>수정</button>
     </a>
 
-    <form id="delete-form" action="/test/post/${boardDto.id}" method="post">
+    <form id="delete-form" action="/board/post/${boardDto.id}" method="post">
         <input type="hidden" name="_method" value="delete"/>
         <button id="delete-btn">삭제</button>
     </form>
