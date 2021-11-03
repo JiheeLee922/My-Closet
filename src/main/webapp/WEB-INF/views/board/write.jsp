@@ -8,6 +8,7 @@
 </head>
 <body>
     <form  action="/board/post" method="post">
+    	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
         제목 : <input type="text" name="title"> <br>
         작성자 : <input type="text" name="writer"> <br>
         <textarea name="content"></textarea><br>
