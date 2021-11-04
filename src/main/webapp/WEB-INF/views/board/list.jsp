@@ -21,7 +21,7 @@ function pageSearch(pageNum){
 </script>
 <body>
 
-<a href="/board/post">글쓰기</a>
+<a href="/board/post"><spring:message code='board.write_post' /></a>
 <a href="/">메인</a>
 <hr>
 <table>
