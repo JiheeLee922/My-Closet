@@ -12,21 +12,29 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.jihee.msub.board.dto.BoardDto;
 import com.jihee.msub.board.service.BoardService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 
 @Controller
+@Api(value="BoardController V1")
 @AllArgsConstructor
-@RequestMapping(value = "board")
+@RequestMapping(value = "/board")
 public class BoardController {
 	
 	private BoardService boardService;
 	
+	@ApiOperation(value = "게시판 리스트", notes = "게시판 목록입니다.")
 	@GetMapping("/list")
-	public String list(Model model, @RequestParam(value = "page", defaultValue = "1") Integer pageNum , @RequestParam(value = "keyword", required = false) String keyword) {
+	public String list(Model model, @ApiParam(value = "게시판페이지번호", required = true, example = "1") @RequestParam(value = "page", defaultValue = "1") Integer pageNum , @RequestParam(value = "keyword", required = false) String keyword) {
 		List<BoardDto> boardList = new ArrayList<>();
 		boardList = boardService.getBoardList(pageNum, keyword);
 		Integer[] pageList = boardService.getPageList(pageNum,keyword);
