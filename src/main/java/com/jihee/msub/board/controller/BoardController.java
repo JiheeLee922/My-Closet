@@ -1,5 +1,6 @@
 package com.jihee.msub.board.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jihee.msub.board.dto.BoardDto;
 import com.jihee.msub.board.service.BoardService;
@@ -24,10 +26,14 @@ public class BoardController {
 	private BoardService boardService;
 	
 	@GetMapping("/list")
-	public String list(Model model ) {
-		List<BoardDto> boardList = boardService.getBoardList();
+	public String list(Model model, @RequestParam(value = "page", defaultValue = "1") Integer pageNum , @RequestParam(value = "keyword", required = false) String keyword) {
+		List<BoardDto> boardList = new ArrayList<>();
+		boardList = boardService.getBoardList(pageNum, keyword);
+		Integer[] pageList = boardService.getPageList(pageNum,keyword);
 		
 		model.addAttribute("boardList",boardList);
+		model.addAttribute("pageList",pageList);
+		model.addAttribute("keyword",keyword);
 		return "board/list";
 	}
 	

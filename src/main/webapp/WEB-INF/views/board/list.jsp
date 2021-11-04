@@ -11,11 +11,19 @@
 
     <link rel="stylesheet" href="/css/board.css">
 </head>
+
+<script type="text/javascript">
+function pageSearch(pageNum){
+	
+	const keyword = document.getElementById("keyword").value;
+	location.href = "/board/list?page="+pageNum+"&keyword="+keyword;
+}
+</script>
 <body>
 
 <a href="/board/post">글쓰기</a>
 <a href="/">메인</a>
-
+<hr>
 <table>
     <thead>
     <tr>
@@ -48,6 +56,24 @@
     </c:forEach>
     </tbody>
 </table>
+
+<div>
+	<c:forEach items="${pageList }" var="pageNum" >
+    <span>
+        <a href="javascript:pageSearch(${pageNum})">${pageNum}</a>
+    </span>
+	</c:forEach>
+</div>
+
+<hr>
+<!-- 검색 form -->
+<form action="/board/list" method="GET">
+    <div>
+        <input name="keyword" id="keyword" type="text" placeholder="검색어를 입력해주세요" value="${keyword}">
+    </div>
+
+    <button>검색하기</button>
+</form>
 
 </body>
 </html>
