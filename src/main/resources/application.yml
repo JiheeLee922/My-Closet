@@ -18,8 +18,10 @@ spring:
     view:
       suffix: .jsp 
       prefix: /WEB-INF/views/     
-sever:
- port:8180
+server:
+  error:
+    whitelabel:
+      enabled: true 
 logging:
   level:
     org:
