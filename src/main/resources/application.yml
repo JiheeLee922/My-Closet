@@ -17,7 +17,18 @@ spring:
     hiddenmethod:      filter:        enabled: true
     view:
       suffix: .jsp 
-      prefix: /WEB-INF/views/     
+      prefix: /WEB-INF/views/    
+
+  mail:
+    host: smtp.gmail.com
+    port : 587
+    username : leejhdev922@gmail.com
+    password : 비밀번호입력하세요
+    properties:      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable : true
 server:
   error:
     whitelabel:
