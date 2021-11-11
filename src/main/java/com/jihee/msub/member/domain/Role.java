@@ -1,4 +1,4 @@
-package com.jihee.msub.login.domain;
+package com.jihee.msub.member.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

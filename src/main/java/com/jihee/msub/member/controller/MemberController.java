@@ -11,8 +11,8 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.jihee.msub.login.dto.MemberDto;
-import com.jihee.msub.login.service.MemberSerivce;
+import com.jihee.msub.member.dto.MemberDto;
+import com.jihee.msub.member.service.MemberSerivce;
 
 import lombok.AllArgsConstructor;
 

@@ -1,4 +1,4 @@
-package com.jihee.msub.login.domain.entity;
+package com.jihee.msub.member.domain.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

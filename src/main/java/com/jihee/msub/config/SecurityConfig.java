@@ -12,7 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.jihee.msub.login.service.MemberSerivce;
+import com.jihee.msub.member.service.MemberSerivce;
 
 import lombok.AllArgsConstructor;
 
