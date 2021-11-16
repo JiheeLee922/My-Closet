@@ -1,11 +1,14 @@
 package com.jihee.msub.config;
 
-import java.util.concurrent.TimeUnit;
+import java.util.Locale;
 
+import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.CacheControl;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -13,12 +16,26 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MvcConfiguration implements WebMvcConfigurer {
 
-	/*
-	 * @Override public void addResourceHandlers(final ResourceHandlerRegistry
-	 * registry) { log.debug("===========mvc Configuration =======" );
-	 * registry.addResourceHandler("/**")
-	 * .addResourceLocations("classpath:/templates/","classpath:/static/")
-	 * .setCacheControl(CacheControl.maxAge(10, TimeUnit.MINUTES)); }
-	 * 
-	 */
+	
+	@Bean
+	public MessageSource messageSource() { //무조건 빈이름은 messageSource여야한다.
+		
+		//메시지 파일로 프로퍼티 형식 사용을 위한 MessageSource 구현체 클래스
+		ResourceBundleMessageSource ms = new ResourceBundleMessageSource();
+		ms.setBasename("message.messages");
+		ms.setDefaultEncoding("UTF-8");
+		return ms;
+	}
+	
+	
+//	@Bean
+//	public LocaleResolver localeResolver() {
+//		SessionLocaleResolver sessionLocalResolver = new SessionLocaleResolver();
+//		sessionLocalResolver.setDefaultLocale(Locale.US);
+//		
+//		return sessionLocalResolver;
+//	}
+	
+	
+	
 }

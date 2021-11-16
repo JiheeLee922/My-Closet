@@ -1,8 +1,6 @@
-package com.jihee.msub.login.dto;
+package com.jihee.msub.member.dto;
 
 import java.time.LocalDateTime;
-
-import com.jihee.msub.login.domain.entity.MemberEntity;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -13,6 +11,8 @@ import lombok.ToString;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+
+import com.jihee.msub.member.domain.entity.MemberEntity;
 
 
 @Getter

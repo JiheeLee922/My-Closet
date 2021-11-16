@@ -1,10 +1,10 @@
-package com.jihee.msub.login.domain.repository;
+package com.jihee.msub.member.domain.repository;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.jihee.msub.login.domain.entity.MemberEntity;
+import com.jihee.msub.member.domain.entity.MemberEntity;
 
 public interface MemberRepository extends JpaRepository<MemberEntity, Long> {
 

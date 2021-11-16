@@ -1,4 +1,4 @@
-package com.jihee.msub.login.service;
+package com.jihee.msub.member.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,10 +19,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 
-import com.jihee.msub.login.domain.Role;
-import com.jihee.msub.login.domain.entity.MemberEntity;
-import com.jihee.msub.login.domain.repository.MemberRepository;
-import com.jihee.msub.login.dto.MemberDto;
+import com.jihee.msub.member.domain.Role;
+import com.jihee.msub.member.domain.entity.MemberEntity;
+import com.jihee.msub.member.domain.repository.MemberRepository;
+import com.jihee.msub.member.dto.MemberDto;
 
 import lombok.AllArgsConstructor;
 

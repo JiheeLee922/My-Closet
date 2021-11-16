@@ -11,8 +11,10 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.jihee.msub.login.dto.MemberDto;
-import com.jihee.msub.login.service.MemberSerivce;
+import com.jihee.msub.member.dto.MailDto;
+import com.jihee.msub.member.dto.MemberDto;
+import com.jihee.msub.member.service.MailService;
+import com.jihee.msub.member.service.MemberSerivce;
 
 import lombok.AllArgsConstructor;
 
@@ -21,6 +23,7 @@ import lombok.AllArgsConstructor;
 public class MemberController {
 
 	private MemberSerivce memberService;
+	private MailService mailService;
 	
 	@GetMapping("/")
 	public String index() {
@@ -83,5 +86,12 @@ public class MemberController {
 	public String dispAdmin() {
 		return "/member/admin";
 	}
+	
+	
+	
+	@PostMapping("/mail")
+    public void execMail(MailDto mailDto) {
+        mailService.mailSend(mailDto);
+    }
 	
 }
