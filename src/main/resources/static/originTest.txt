@@ -1,0 +1,24 @@
+1,1,3,2,2 3,3,4,2,2
+1,4,2,2,2 4,1,4,1,4
+2,2,3,4,4 4,2,3,4,4
+2,2,2,3,3 1,3,2,1,2
+1,3,4,2,4 1,1,1,
+
+-x서버에 가까운 가장 저수준의 x클라이언트 라이브러리 : XCB
+-단말기가 전송로의 신호유무를 조사하고, 다른 단말기가 신호를 송출하고 있는지를 확인 : CSMA/CD
+-DQDB프로토콜 제정 국제기구 : IEEE
+ ㄴ도시권 통신망 MAN과 관련, 회선,패킷교환모두가능. 
+ ㄴ 데이터 ,음성, 비디오 전송 지원
+-이동통신 분야의 5G제정과 관련 : ITU
+-IP주소,포트번호와 관련 기구: IANA
+-상대방 fs일부를 마치 로컬 디렉터리 처럼 : NFS(NIS,RPC,portmap)
+-인터넷 통해 원격 컴터상의 파일이나 서비스 요청하는 표준 프로토콜, tcp/ip기반 : CIFS - SAMBA와 관련높
+-디스크파티션에 부여된 uuid값 확인 : blkid
+-tar 압축 : xz-Jcvf / bzip2-jcvf / gzip-zcvf (해제는 zxvf)
+-deslect,alien, apt ,synaptic 다 데비안 계열 패키지도구
+-synaptic은 CTK+기반의 GUI 도구
+-<네트워크 프린트 설정 환경>
+ AppSocket/HP jecDirect, LPD/LPR 호스트 또는 프린터
+, Windows Printer vis SAMBA, http, ipp
+- 초창기부터 com, net, org, edu, gov, mil,int의 6개
+-ip주소와 서브넷마스트 &연산(11일때만 1)수행한것이 네트워크 주소. 그 주소에서 서브넷마스크의 0에 해당하는 자리수를 1로 다 바꿔주면 브로드캐스트 주소
