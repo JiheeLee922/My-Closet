@@ -94,4 +94,9 @@ public class MemberController {
         mailService.mailSend(mailDto);
     }
 	
+	
+	@GetMapping("/chatRoom")
+	public String chatView() {
+		return "/member/chatting";
+	}
 }
