@@ -1,7 +1,8 @@
 # Springboot-JPA
 
-commit rules
+JPA / Spring Security / Send Mail Serivce / Swagger2 Api / WebSocket
 
+commit rules
 1. daily commit 
 2. fortmat -> [정해진 접두어] : 커밋 메시지
   - **feat** : 새로운 기능 추가
