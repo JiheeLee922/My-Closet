@@ -54,10 +54,32 @@
 			$("#yourName").hide();
 			$("#yourMsg").show();
 			$("#endBtn").show();
+			
+			var str = $("#userName").val() + " 님이 입장하셨습니다.";
+            ws.send(str);
 		}
 		
 		ws.onmessage = function(data){
-			$("<p>" + data.data + "</p>").prependTo('#chating');
+			let msg = data.data;
+			
+			if(msg.split(" : ").length < 2){
+				$("<p style='color:#8ddaec'>" + data.data + "</p>").prependTo('#chating');
+			}
+			else if(msg.split(" : ")[0] != $("#userName").val()){
+				$("<p style='color:#e2cc32;'>" + data.data + "</p>").prependTo('#chating');
+			}
+			else
+			{
+				$("<p>" + data.data + "</p>").prependTo('#chating');
+			}
+		}
+		
+		ws.onclose = function(event){
+			if(event.wasClean){
+				$("<p>커넥션 정상 종료</p>").prependTo('#chating');
+			}else{
+				$("<p>커넥션 dead</p>").prependTo('#chating');
+			}	
 		}
 		
 		document.addEventListener("keypress", function(e){
@@ -75,11 +97,22 @@
 		if(msg == '' ){
 			return;
 		}
-		ws.send(uN+" : "+msg);
+		
+		//인터넷이 느린 경우나 보내는 데이터가 많은경우 여러번 보내지 않도록 
+		var interval = setInterval(() => {
+			if(ws.bufferedAmount == 0){ 
+				ws.send(uN+" : "+msg);
+				clearInterval(interval);
+				
+			}
+		}, 100);
 		$('#chatting').val("");
 	}
 	
 	function disconnectWs(){
+		var str = $("#userName").val() + " 님이 방을 나가셨습니다.";
+        ws.send(str);
+        
 		ws.close();
 		ws = null;
 		$("#yourName").show();

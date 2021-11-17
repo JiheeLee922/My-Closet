@@ -20,7 +20,8 @@ public class WebSocketConfig implements WebSocketConfigurer {
 	
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-		registry.addHandler(socketTextHandler, "/chat"); //chat으로 호출이 오면 socketTextHandler 실행
+		registry.addHandler(socketTextHandler, "/chat")
+				.setAllowedOrigins("*"); //chat으로 호출이 오면 socketTextHandler 실행
 	}
 
 }

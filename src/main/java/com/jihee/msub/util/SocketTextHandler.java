@@ -32,7 +32,7 @@ public class SocketTextHandler extends TextWebSocketHandler{
 		super.afterConnectionEstablished(session);
 		sessions.put(session.getId(), session);
 		
-		sendMessage(new TextMessage(session.getId()+"´ÔÀÌ µé¾î¿À¼Ì½À´Ï´Ù. "));
+		//sendMessage(new TextMessage(session.getId()+"´ÔÀÌ µé¾î¿À¼Ì½À´Ï´Ù. "));
 	}
 	
 	
@@ -40,7 +40,7 @@ public class SocketTextHandler extends TextWebSocketHandler{
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		sessions.remove(session.getId());
-		sendMessage(new TextMessage(session.getId()+"´ÔÀÌ ³ª°¡¼Ì½À´Ï´Ù. "));
+		//sendMessage(new TextMessage(session.getId()+"´ÔÀÌ ³ª°¡¼Ì½À´Ï´Ù. "));
 		
 		super.afterConnectionClosed(session, status);
 	}
