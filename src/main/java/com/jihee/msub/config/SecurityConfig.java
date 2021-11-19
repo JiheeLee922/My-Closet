@@ -60,6 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.antMatchers("/admin/**").hasRole("ADMIN")		//해당 경로는 ADMIN 롤을 가진 사용자만 접근 가능
 				.antMatchers("/user/myinfo").hasRole("MEMBER")
 				.antMatchers("/board/**").hasRole("MEMBER")
+				.antMatchers("/chat/**").hasRole("MEMBER")
 				.antMatchers("/**").permitAll()		//	<-> .anyRequest().authenticated() 모든 사용자 접근가능
 			.and()	//로그인 설정
 				.formLogin()

@@ -42,6 +42,7 @@ dependencies {
     implementation 'io.springfox:springfox-swagger-ui:2.9.2'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    implementation group: 'org.webjars', name: 'stomp-websocket', version: '2.3.3-1'
     
 }
 
