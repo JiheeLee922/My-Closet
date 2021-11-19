@@ -4,6 +4,8 @@
 <html>
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
+
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 </head>
@@ -47,7 +49,8 @@
 	
 	function connectWs() {
 		$("#chat").html('');
-		ws = new WebSocket('ws://' + location.host + '/chat');
+//		ws = new WebSocket('ws://' + location.host + '/chat');
+		ws = new SockJS("/chat", null, {transports: ["websocket", "xhr-streaming", "xhr-polling"]});
 		
 		ws.onopen = function(data){
 			//소켓이 열리면 초기화 세팅하기
@@ -63,22 +66,22 @@
 			let msg = data.data;
 			
 			if(msg.split(" : ").length < 2){
-				$("<p style='color:#8ddaec'>" + data.data + "</p>").prependTo('#chating');
+				$("<p style='color:#8ddaec'>" + data.data + "</p>").appendTo('#chating');
 			}
 			else if(msg.split(" : ")[0] != $("#userName").val()){
-				$("<p style='color:#e2cc32;'>" + data.data + "</p>").prependTo('#chating');
+				$("<p style='color:#e2cc32;'>" + data.data + "</p>").appendTo('#chating');
 			}
 			else
 			{
-				$("<p>" + data.data + "</p>").prependTo('#chating');
+				$("<p>" + data.data + "</p>").appendTo('#chating');
 			}
 		}
 		
 		ws.onclose = function(event){
 			if(event.wasClean){
-				$("<p>커넥션 정상 종료</p>").prependTo('#chating');
+				$("<p>커넥션 정상 종료</p>").appendTo('#chating');
 			}else{
-				$("<p>커넥션 dead</p>").prependTo('#chating');
+				$("<p>커넥션 dead</p>").appendTo('#chating');
 			}	
 		}
 		
@@ -98,15 +101,14 @@
 			return;
 		}
 		
-		//인터넷이 느린 경우나 보내는 데이터가 많은경우 여러번 보내지 않도록 
-		var interval = setInterval(() => {
-			if(ws.bufferedAmount == 0){ 
+		//인터넷이 느린 경우나 보내는 데이터가 많은경우 여러번 보내지 않도록 -> sockjs 적용하니깐 안먹혀서 주석
+		/* var interval = setInterval(() => {
+			if(ws.bufferedAmount == 0){  */
 				ws.send(uN+" : "+msg);
-				clearInterval(interval);
-				
+				$('#chatting').val("");
+				/* clearInterval(interval);
 			}
-		}, 100);
-		$('#chatting').val("");
+		}, 100); */
 	}
 	
 	function disconnectWs(){
