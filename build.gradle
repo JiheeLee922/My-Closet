@@ -43,8 +43,23 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-mail'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
     implementation group: 'org.webjars', name: 'stomp-websocket', version: '2.3.3-1'
-    
+    implementation 'com.amazonaws:aws-lambda-java-core:1.2.1'
+    implementation 'com.amazonaws:aws-lambda-java-events:3.1.0'
+    runtimeOnly 'com.amazonaws:aws-lambda-java-log4j2:1.2.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
 }
 
+task buildZip(type: Zip) {
+    from compileJava  			//함수의 클래스를 컴파일
+    from processResources		//Java 프로젝트 리소스를 대상 디렉터리에 복사하고 잠재적으로 처리
+    into('lib') {				//빌드의 클래스 경로에서 lib라는 폴더로 종속성 라이브러리를 복사
+        from configurations.runtimeClasspath
+    }
+}
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
 
+build.dependsOn buildZip
