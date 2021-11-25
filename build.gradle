@@ -19,6 +19,16 @@ repositories {
 	jcenter()
 }
 
+ext {
+    set('springCloudVersion', "Greenwich.SR1")
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
@@ -43,10 +53,30 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-mail'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
     implementation group: 'org.webjars', name: 'stomp-websocket', version: '2.3.3-1'
+    
+    implementation 'org.springframework.cloud:spring-cloud-function-adapter-aws'
+    implementation 'org.springframework.cloud:spring-cloud-starter-function-web'
     implementation 'com.amazonaws:aws-lambda-java-core:1.2.1'
     implementation 'com.amazonaws:aws-lambda-java-events:3.1.0'
     runtimeOnly 'com.amazonaws:aws-lambda-java-log4j2:1.2.0'
     implementation 'com.google.code.gson:gson:2.8.6'
+    
+    //외부 브로커를 사용하기 위해
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-reactor-netty', version: '2.4.6'
+	
+	//jackson2json에서 LocalDateTime을 handling 하기 위해
+	implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.12.4'
+	
+	implementation 'org.springframework.boot:spring-boot-starter-amqp'
+	testImplementation 'org.springframework.amqp:spring-rabbit-test'
+	
+	/* ---아래는 선택--- */
+	implementation group: 'org.webjars', name: 'sockjs-client', version: '1.1.2'
+	implementation group: 'org.webjars', name: 'stomp-websocket', version: '2.3.3-1'
+}
+
+test {
+    useJUnitPlatform()
 }
 
 task buildZip(type: Zip) {
@@ -55,6 +85,11 @@ task buildZip(type: Zip) {
     into('lib') {				//빌드의 클래스 경로에서 lib라는 폴더로 종속성 라이브러리를 복사
         from configurations.runtimeClasspath
     }
+}
+
+compileJava.options.encoding = 'UTF-8'
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
 }
 
 java {

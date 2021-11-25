@@ -28,7 +28,7 @@
 	display: grid;
 	padding: 15px;
 }
-#button-send{
+.btn-outline-secondary{
 	border: 1px solid white;
     background-color: #d5d5d5;
     width: 60px;
@@ -40,6 +40,8 @@
     <title>채팅방</title>
 </head>
 <script type="text/javascript">
+
+	let stomp = null;
 	$(document).ready(function(){
 		
 		let roomName = "${room.name}";
@@ -48,7 +50,7 @@
 		
 		//1. SockJs를 내부에 들고있는 Stomp를 내어줌
 		let sockJs = new SockJS("/stomp/chat");
-		let stomp = Stomp.over(sockJs);
+		stomp = Stomp.over(sockJs);
 		
 		//2. connection이 맺어지면 실행
 		stomp.connect({}, function(){
@@ -96,6 +98,14 @@
 		});
 		
 	});
+	
+	function disconnect(){
+		debugger;
+		if(stomp !== null){
+			stomp.disconnect();
+		}
+	}
+	
 </script>
 <body>
     <div>
@@ -104,6 +114,7 @@
 	            <div class="col-6">
 	                <h1>● ${room.name}</h1>
 	            </div>
+	            <button class="btn btn-outline-secondary" type="button" onclick="disconnect()">나가기</button>
 	            <div style="width: 720px;">
 	                <div id="msgArea" class="col"></div>
 	                <div class="col-6">

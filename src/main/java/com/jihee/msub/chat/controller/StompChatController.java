@@ -8,6 +8,8 @@ import com.jihee.msub.chat.dto.ChatMessageDTO;
 
 import lombok.RequiredArgsConstructor;
 
+/** 해당 컨트롤러는 stomp까지만 사용. rabbit 적용 후엔 StompRabbitController 참고하기!!!!!!*/
+@Deprecated
 @Controller
 @RequiredArgsConstructor
 public class StompChatController {
