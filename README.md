@@ -1,6 +1,6 @@
 # Springboot-JPA
 
-JPA / Spring Security / Send Mail Serivce / Swagger2 Api / WebSocket
+JPA / Spring Security / Send Mail Serivce / Swagger2 Api / WebSocket - SockJS, STOMP , RabbitMQ
 
 commit rules
 1. daily commit 
