@@ -29,6 +29,13 @@ spring:
           auth: true
           starttls:
             enable : true
+
+  rabbitmq:
+    username: guest
+    password: guest
+    host: localhost
+    port: 5672
+                
 server:
   error:
     whitelabel:

@@ -24,25 +24,39 @@ public class ChatRoomController {
 	
 	
 	@GetMapping("/rooms")
-	public ModelAndView rooms() {
-		
-		ModelAndView mv = new ModelAndView("/chat/rooms");
-		mv.addObject("list", repository.findAllRooms());
-		
-		return mv;
-	}
-	
-	@PostMapping("/room")
-	public String create(@RequestParam String name, RedirectAttributes rttr) {
-		rttr.addFlashAttribute("roomName", repository.createChatRoomDTO(name));
-		
-		return "redirect:/chat/rooms";
-	}
-	
-	
-	@GetMapping("/room")
-	public void getRoom(String roomId, Model model, Principal principal) {
-		model.addAttribute("room", repository.findRoomById(roomId));
-		model.addAttribute("username", principal.getName());
-	}
+    public String getRooms(){
+        return "chat/rooms";
+    }
+
+    @GetMapping(value = "/room")
+    public String getRoom(Long chatRoomId, String nickname, Model model){
+
+        model.addAttribute("chatRoomId", chatRoomId);
+        model.addAttribute("nickname", nickname);
+
+        return "chat/room";
+    }
+	    
+//	@GetMapping("/rooms")
+//	public ModelAndView rooms() {
+//		
+//		ModelAndView mv = new ModelAndView("/chat/rooms");
+//		mv.addObject("list", repository.findAllRooms());
+//		
+//		return mv;
+//	}
+//	
+//	@PostMapping("/room")
+//	public String create(@RequestParam String name, RedirectAttributes rttr) {
+//		rttr.addFlashAttribute("roomName", repository.createChatRoomDTO(name));
+//		
+//		return "redirect:/chat/rooms";
+//	}
+//	
+//	
+//	@GetMapping("/room")
+//	public void getRoom(String roomId, Model model, Principal principal) {
+//		model.addAttribute("room", repository.findRoomById(roomId));
+//		model.addAttribute("username", principal.getName());
+//	}
 }

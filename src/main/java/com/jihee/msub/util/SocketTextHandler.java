@@ -10,6 +10,9 @@ import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+
+/** 해당 컨트롤러는 STOMP 적용 후 사용안함. Stomp 적용 전에는 핸들러로 직접 세션 관리했지만 Stomp 적용 후에는 필요 없어짐*/
+@Deprecated
 @Component
 public class SocketTextHandler extends TextWebSocketHandler{
 
