@@ -19,7 +19,8 @@ import lombok.RequiredArgsConstructor;
 public class StompRabbitController {
 	
 	private final RabbitTemplate template;  // 전에는 SimpleMessagingTemplate 사용했다.
-	private final static String CHAT_EXCHANGE_NAME = "chat.exchage";
+	private final static String CHAT_EXCHANGE_NAME = "chat.exchange";
+	private final static String CHAT_TOPIC = "amq.topic";
 	private final static String CHAT_QUEUE_NAME = "chat.queue";
 	private static final String ROUTING_KEY = "room.";
 	
@@ -31,14 +32,17 @@ public class StompRabbitController {
 		chat.setMessage("입장하셨습니다.");
 		chat.setRegDate(LocalDateTime.now()); 
 		
-		template.convertAndSend(CHAT_EXCHANGE_NAME, ROUTING_KEY+ chatRoomId, chat);
+		template.convertAndSend(CHAT_TOPIC, ROUTING_KEY+ chatRoomId, chat); //Topic Destination
+		//template.convertAndSend( ROUTING_KEY+ chatRoomId, chat); //Queue Destination
+		//template.convertAndSend(CHAT_EXCHANGE_NAME, ROUTING_KEY+ chatRoomId, chat); //Exchange Destination
+		
 	}
 	
 	@MessageMapping("chat.message.{chatRoomId}")
 	public void send(ChatDTO chat, @DestinationVariable String chatRoomId) {
 		chat.setRegDate(LocalDateTime.now());
 		
-		template.convertAndSend(CHAT_EXCHANGE_NAME, ROUTING_KEY + chatRoomId, chat);
+		template.convertAndSend(CHAT_TOPIC, ROUTING_KEY + chatRoomId, chat);
 	}
 	
 	
