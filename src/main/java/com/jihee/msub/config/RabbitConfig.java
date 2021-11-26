@@ -26,15 +26,15 @@ public class RabbitConfig {
 	private static final String CHAT_EXCHANGE_NAME = "chat.exchange";
 	private static final String ROUTING_KEY = "room.*";
 
-    /** Queue 등록*/
+    /** Queue 등록 -> 클라이언트 1명 당 1개가 생김*/
     @Bean
     public Queue queue(){ return new Queue(CHAT_QUEUE_NAME, true); }
 
-    /** Exchange 등록 */
+    /** Exchange 등록 -> queue들을 다 바인딩 하고 있고, 메세지가 오면 routing key가 같은 큐에 메세지 보낸다(?) */
     @Bean
     public TopicExchange exchange(){ return new TopicExchange(CHAT_EXCHANGE_NAME); }
 
-    /** Exchange와 Queue 바인딩 */
+    /** Exchange와 Queue 바인딩 -> queue를 exchange에 routing key 가지고 바인딩한다*/
     @Bean
     public Binding binding(Queue queue, TopicExchange exchange) {
         return BindingBuilder.bind(queue).to(exchange).with(ROUTING_KEY);
