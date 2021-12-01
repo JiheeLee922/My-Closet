@@ -44,13 +44,13 @@ public class SwaggerConfig {
 				.build());
 		
 		return new Docket(DocumentationType.SWAGGER_2)
-				.useDefaultResponseMessages(false)		//false·Î ¼³Á¤ÇØ swagger¿¡¼­ Á¦°øÇØÁÖ´Â ÀÀ´äÄÚµå¿¡ ´ëÇÑ ±âº» ¸Ş½ÃÁö Á¦°Å
-				.groupName(version)					//Docket BeanÀÌ ¿©·¯°³ÀÎ °æ¿ì groupnameÀÌ Ãæµ¹ÇÏÁö ¾Êµµ·Ï ¸í½ÃÇØÁÜ
-				.select()							//ApiSelectorBuilder »ı¼º
-				.apis(RequestHandlerSelectors.basePackage("com.jihee.msub.board.controller"))	//ÄÁÆ®·Ñ·¯°¡ ÀÛ¼ºµÇ¾î ÀÖ´Â ÆĞÅ°Áö ¼³Á¤.
-				.paths(PathSelectors.ant("/board/**"))		//apis()¿¡¼­ ¼±ÅÃµÇ¾îÁø APIÁß Æ¯Á¤ pathÁ¶°Ç¿¡ ¸Â´Â APIµéÀ» ´Ù½Ã ÇÊÅÍ¸µ
+				.useDefaultResponseMessages(false)		//falseë¡œ ì„¤ì •í•´ swaggerì—ì„œ ì œê³µí•´ì£¼ëŠ” ì‘ë‹µì½”ë“œì— ëŒ€í•œ ê¸°ë³¸ ë©”ì‹œì§€ ì œê±°
+				.groupName(version)					//Docket Beanì´ ì—¬ëŸ¬ê°œì¸ ê²½ìš° groupnameì´ ì¶©ëŒí•˜ì§€ ì•Šë„ë¡ ëª…ì‹œí•´ì¤Œ
+				.select()							//ApiSelectorBuilder ìƒì„±
+				.apis(RequestHandlerSelectors.basePackage("com.jihee.msub.board.controller"))	//ì»¨íŠ¸ë¡¤ëŸ¬ê°€ ì‘ì„±ë˜ì–´ ìˆëŠ” íŒ¨í‚¤ì§€ ì„¤ì •.
+				.paths(PathSelectors.ant("/board/**"))		//apis()ì—ì„œ ì„ íƒë˜ì–´ì§„ APIì¤‘ íŠ¹ì • pathì¡°ê±´ì— ë§ëŠ” APIë“¤ì„ ë‹¤ì‹œ í•„í„°ë§
 				.build()
-				.apiInfo(apiInfo(title,version)) 		//Á¦¸ñ ,¼³¸í µî ¹®¼­¿¡ ´ëÇÑ Á¤º¸µéÀ» º¸¿©ÁÖ±â À§ÇØ È£Ãâ
+				.apiInfo(apiInfo(title,version)) 		//ì œëª© ,ì„¤ëª… ë“± ë¬¸ì„œì— ëŒ€í•œ ì •ë³´ë“¤ì„ ë³´ì—¬ì£¼ê¸° ìœ„í•´ í˜¸ì¶œ
 				.globalResponseMessage(RequestMethod.GET, responseMessages);
 		
 	}
@@ -61,13 +61,13 @@ public class SwaggerConfig {
 		title = "My closet API "+ version;
 		
 		return new Docket(DocumentationType.SWAGGER_2)
-				.useDefaultResponseMessages(false)		//false·Î ¼³Á¤ÇØ swagger¿¡¼­ Á¦°øÇØÁÖ´Â ÀÀ´äÄÚµå¿¡ ´ëÇÑ ±âº» ¸Ş½ÃÁö Á¦°Å
-				.groupName(version)					//Docket BeanÀÌ ¿©·¯°³ÀÎ °æ¿ì groupnameÀÌ Ãæµ¹ÇÏÁö ¾Êµµ·Ï ¸í½ÃÇØÁÜ
-				.select()							//ApiSelectorBuilder »ı¼º
-				.apis(RequestHandlerSelectors.basePackage("com.jihee.msub.member.controller"))	//ÄÁÆ®·Ñ·¯°¡ ÀÛ¼ºµÇ¾î ÀÖ´Â ÆĞÅ°Áö ¼³Á¤.
-				.paths(PathSelectors.ant("/**"))		//apis()¿¡¼­ ¼±ÅÃµÇ¾îÁø APIÁß Æ¯Á¤ pathÁ¶°Ç¿¡ ¸Â´Â APIµéÀ» ´Ù½Ã ÇÊÅÍ¸µ
+				.useDefaultResponseMessages(false)		//falseë¡œ ì„¤ì •í•´ swaggerì—ì„œ ì œê³µí•´ì£¼ëŠ” ì‘ë‹µì½”ë“œì— ëŒ€í•œ ê¸°ë³¸ ë©”ì‹œì§€ ì œê±°
+				.groupName(version)					//Docket Beanì´ ì—¬ëŸ¬ê°œì¸ ê²½ìš° groupnameì´ ì¶©ëŒí•˜ì§€ ì•Šë„ë¡ ëª…ì‹œí•´ì¤Œ
+				.select()							//ApiSelectorBuilder ìƒì„±
+				.apis(RequestHandlerSelectors.basePackage("com.jihee.msub.member.controller"))	//ì»¨íŠ¸ë¡¤ëŸ¬ê°€ ì‘ì„±ë˜ì–´ ìˆëŠ” íŒ¨í‚¤ì§€ ì„¤ì •.
+				.paths(PathSelectors.ant("/**"))		//apis()ì—ì„œ ì„ íƒë˜ì–´ì§„ APIì¤‘ íŠ¹ì • pathì¡°ê±´ì— ë§ëŠ” APIë“¤ì„ ë‹¤ì‹œ í•„í„°ë§
 				.build()
-				.apiInfo(apiInfo(title,version)); 		//Á¦¸ñ ,¼³¸í µî ¹®¼­¿¡ ´ëÇÑ Á¤º¸µéÀ» º¸¿©ÁÖ±â À§ÇØ È£Ãâ
+				.apiInfo(apiInfo(title,version)); 		//ì œëª© ,ì„¤ëª… ë“± ë¬¸ì„œì— ëŒ€í•œ ì •ë³´ë“¤ì„ ë³´ì—¬ì£¼ê¸° ìœ„í•´ í˜¸ì¶œ
 	}
 	
 	
@@ -75,7 +75,7 @@ public class SwaggerConfig {
 	private ApiInfo apiInfo(String title, String version) {
 		return new ApiInfo(
 				title, 
-				"Java Spring boot Jpa ÇÁ·ÎÁ§Æ®",
+				"Java Spring boot Jpa í”„ë¡œì íŠ¸",
 				version,
 				"www.example.com",
 				new Contact("Contact Me", "www.example.com", "leejhdev922@gmail.com"), 

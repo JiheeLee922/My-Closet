@@ -39,10 +39,10 @@ public class MemberController {
 	@PostMapping("/user/signup")
 	public String execSignup(@Valid MemberDto memberDto, Errors errors, Model model) {
 		if(errors.hasErrors()) {
-			//È¸¿ø°¡ÀÔ À¯È¿¼º ½ÇÆĞ ½Ã, ÀÔ·Â µ¥ÀÌÅÍ À¯Áö
+			//íšŒì›ê°€ì… ìœ íš¨ì„± ì‹¤íŒ¨ ì‹œ, ì…ë ¥ ë°ì´í„° ìœ ì§€
 			model.addAttribute("userDto", memberDto);
 			
-			//À¯È¿¼º ½ÇÆĞ ÇÚµé¸µ
+			//ìœ íš¨ì„± ì‹¤íŒ¨ í•¸ë“¤ë§
 			Map<String, String> validatorResult = memberService.validateHandling(errors);
 			for(String key : validatorResult.keySet()) {
 				model.addAttribute(key, validatorResult.get(key));

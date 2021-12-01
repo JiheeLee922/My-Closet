@@ -9,7 +9,7 @@ import com.jihee.msub.board.domain.entity.BoardEntity;
 public interface BoardRepository extends JpaRepository<BoardEntity, Long> {
 
 	Page<BoardEntity> findByTitleContaining(String keyword , Pageable paging);
-	//ContainingÀ» ºÙ¿©ÁÖ¸é Like °Ë»öÀÌ µÈ´Ù
+	//Containingì„ ë¶™ì—¬ì£¼ë©´ Like ê²€ìƒ‰ì´ ëœë‹¤
 	
 	Long countByTitleContaining(String keyword);
 }

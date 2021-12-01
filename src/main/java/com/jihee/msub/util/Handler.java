@@ -10,14 +10,14 @@ import com.google.gson.GsonBuilder;
 
 
 /**
- * ÇÔ¼ö°¡ È£ÃâµÇ¸é Lambda´Â ÇÚµé·¯ ¸Ş¼­µå¸¦ ½ÇÇà
+ * í•¨ìˆ˜ê°€ í˜¸ì¶œë˜ë©´ LambdaëŠ” í•¸ë“¤ëŸ¬ ë©”ì„œë“œë¥¼ ì‹¤í–‰
  * */
 public class Handler implements RequestHandler<Map<String, String>, String>{
 
 	Gson gson = new GsonBuilder().setPrettyPrinting().create();
 	
 	/**
-	 * ÇÚµé·¯ ¸Ş¼Òµå´Â ÀÌº¥Æ® ¹× ÄÁÅØ½ºÆ® °´Ã¼¸¦ ÀÔ·ÂÀ¸·Î ¹Ş¾Æ ¹®ÀÚ¿­À» ¹İÈ¯.
+	 * í•¸ë“¤ëŸ¬ ë©”ì†Œë“œëŠ” ì´ë²¤íŠ¸ ë° ì»¨í…ìŠ¤íŠ¸ ê°ì²´ë¥¼ ì…ë ¥ìœ¼ë¡œ ë°›ì•„ ë¬¸ìì—´ì„ ë°˜í™˜.
 	 * com.jihee.msub.util.Handler::handle
 	 * */
 	@Override

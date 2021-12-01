@@ -32,9 +32,9 @@ public class BoardController {
 	
 	private BoardService boardService;
 	
-	@ApiOperation(value = "°Ô½ÃÆÇ ¸®½ºÆ®", notes = "°Ô½ÃÆÇ ¸ñ·ÏÀÔ´Ï´Ù.")
+	@ApiOperation(value = "ê²Œì‹œíŒ ë¦¬ìŠ¤íŠ¸", notes = "ê²Œì‹œíŒ ëª©ë¡ì…ë‹ˆë‹¤.")
 	@GetMapping("/list")
-	public String list(Model model, @ApiParam(value = "°Ô½ÃÆÇÆäÀÌÁö¹øÈ£", required = true, example = "1") @RequestParam(value = "page", defaultValue = "1") Integer pageNum , @RequestParam(value = "keyword", required = false) String keyword) {
+	public String list(Model model, @ApiParam(value = "ê²Œì‹œíŒí˜ì´ì§€ë²ˆí˜¸", required = true, example = "1") @RequestParam(value = "page", defaultValue = "1") Integer pageNum , @RequestParam(value = "keyword", required = false) String keyword) {
 		List<BoardDto> boardList = new ArrayList<>();
 		boardList = boardService.getBoardList(pageNum, keyword);
 		Integer[] pageList = boardService.getPageList(pageNum,keyword);

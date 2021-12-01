@@ -8,20 +8,20 @@ import com.jihee.msub.chat.dto.ChatMessageDTO;
 
 import lombok.RequiredArgsConstructor;
 
-/** ÇØ´ç ÄÁÆ®·Ñ·¯´Â stomp±îÁö¸¸ »ç¿ë. rabbit Àû¿ë ÈÄ¿£ StompRabbitController Âü°íÇÏ±â!!!!!!*/
+/** í•´ë‹¹ ì»¨íŠ¸ë¡¤ëŸ¬ëŠ” stompê¹Œì§€ë§Œ ì‚¬ìš©. rabbit ì ìš© í›„ì—” StompRabbitController ì°¸ê³ í•˜ê¸°!!!!!!*/
 @Deprecated
 @Controller
 @RequiredArgsConstructor
 public class StompChatController {
 
-	private final SimpMessagingTemplate template ; //Æ¯Á¤ Broker·Î ¸Ş¼¼Áö¸¦ Àü´Ş
+	private final SimpMessagingTemplate template ; //íŠ¹ì • Brokerë¡œ ë©”ì„¸ì§€ë¥¼ ì „ë‹¬
 	
 	
-	//client°¡ SEND ÇÒ ¼ö ÀÖ´Â °æ·Î
-	//WebSocket Congig¿¡¼­ ¼³Á¤ÇÑ setApplicationDestinationPrefixes ¿Í °æ·Î º´ÇÕµÊ -> "/pub/chat/enter"
-	@MessageMapping(value="/chat/enter")	//ÇØ´ç ¾î³ë¸¦ ÅëÇØ WebSocketÀ¸·Î µé¾î¿À´Â ¸Ş¼¼Áö ¹ßÇà Ã³¸®
+	//clientê°€ SEND í•  ìˆ˜ ìˆëŠ” ê²½ë¡œ
+	//WebSocket Congigì—ì„œ ì„¤ì •í•œ setApplicationDestinationPrefixes ì™€ ê²½ë¡œ ë³‘í•©ë¨ -> "/pub/chat/enter"
+	@MessageMapping(value="/chat/enter")	//í•´ë‹¹ ì–´ë…¸ë¥¼ í†µí•´ WebSocketìœ¼ë¡œ ë“¤ì–´ì˜¤ëŠ” ë©”ì„¸ì§€ ë°œí–‰ ì²˜ë¦¬
 	public void enter (ChatMessageDTO message) {
-		message.setMessage(message.getWriter() + "´ÔÀÌ Ã¤ÆÃ¹æ¿¡ Âü¿©ÇÏ¿´½À´Ï´Ù.");
+		message.setMessage(message.getWriter() + "ë‹˜ì´ ì±„íŒ…ë°©ì— ì°¸ì—¬í•˜ì˜€ìŠµë‹ˆë‹¤.");
 		template.convertAndSend("/sub/chat/room/" + message.getRoomId() , message);
 	}
 	

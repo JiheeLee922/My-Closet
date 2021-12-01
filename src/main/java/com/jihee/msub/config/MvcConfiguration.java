@@ -18,9 +18,9 @@ public class MvcConfiguration implements WebMvcConfigurer {
 
 	
 	@Bean
-	public MessageSource messageSource() { //¹«Á¶°Ç ºóÀÌ¸§Àº messageSource¿©¾ßÇÑ´Ù.
+	public MessageSource messageSource() { //ë¬´ì¡°ê±´ ë¹ˆì´ë¦„ì€ messageSourceì—¬ì•¼í•œë‹¤.
 		
-		//¸Ş½ÃÁö ÆÄÀÏ·Î ÇÁ·ÎÆÛÆ¼ Çü½Ä »ç¿ëÀ» À§ÇÑ MessageSource ±¸ÇöÃ¼ Å¬·¡½º
+		//ë©”ì‹œì§€ íŒŒì¼ë¡œ í”„ë¡œí¼í‹° í˜•ì‹ ì‚¬ìš©ì„ ìœ„í•œ MessageSource êµ¬í˜„ì²´ í´ë˜ìŠ¤
 		ResourceBundleMessageSource ms = new ResourceBundleMessageSource();
 		ms.setBasename("message.messages");
 		ms.setDefaultEncoding("UTF-8");
