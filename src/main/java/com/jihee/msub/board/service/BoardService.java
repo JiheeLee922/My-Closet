@@ -24,8 +24,8 @@ public class BoardService {
 	
 	private BoardRepository boardRepository;
 	
-    private static final int BLOCK_PAGE_NUM_COUNT = 5; // ºí·°¿¡ Á¸ÀçÇÏ´Â ÆäÀÌÁö ¹øÈ£ ¼ö
-    private static final int PAGE_POST_COUNT = 4; // ÇÑ ÆäÀÌÁö¿¡ Á¸ÀçÇÏ´Â °Ô½Ã±Û ¼ö
+    private static final int BLOCK_PAGE_NUM_COUNT = 5; // ë¸”ëŸ­ì— ì¡´ì¬í•˜ëŠ” í˜ì´ì§€ ë²ˆí˜¸ ìˆ˜
+    private static final int PAGE_POST_COUNT = 4; // í•œ í˜ì´ì§€ì— ì¡´ì¬í•˜ëŠ” ê²Œì‹œê¸€ ìˆ˜
 	
 	@Transactional
 	public Long savePost(BoardDto boardDto) {
@@ -88,19 +88,19 @@ public class BoardService {
     public Integer[] getPageList(Integer curPageNum, String keyword) {
     	Integer[] pageList = new Integer[BLOCK_PAGE_NUM_COUNT];
     	
-    	Double postsTotalCount = 0.0; //ÃÑ °Ô½Ã±Û ¼ö
+    	Double postsTotalCount = 0.0; //ì´ ê²Œì‹œê¸€ ìˆ˜
     	if(keyword == null) {
     		postsTotalCount = Double.valueOf(this.getBoardCount());
     	}else {
     		postsTotalCount = Double.valueOf(this.getBoardCount(keyword));
     	}
     		
-    	Integer totalLastPageNum = (int)(Math.ceil((postsTotalCount/PAGE_POST_COUNT)));	//¸¶Áö¸· ÆäÀÌÁö ¹øÈ£ °è»ê
-    	curPageNum = (curPageNum <= 3 ) ? 1 : curPageNum -2;	//ÆäÀÌÁö ½ÃÀÛ¹øÈ£ Á¶Á¤
-    	Integer blockLastPageNum = (totalLastPageNum > curPageNum + BLOCK_PAGE_NUM_COUNT -1)	//ÇöÀç ÆäÀÌÁö ±âÁØ ºí·°ÀÇ ¸¶Áö¸· ÆäÀÌÁö ¹øÈ£ °è»ê 
+    	Integer totalLastPageNum = (int)(Math.ceil((postsTotalCount/PAGE_POST_COUNT)));	//ë§ˆì§€ë§‰ í˜ì´ì§€ ë²ˆí˜¸ ê³„ì‚°
+    	curPageNum = (curPageNum <= 3 ) ? 1 : curPageNum -2;	//í˜ì´ì§€ ì‹œì‘ë²ˆí˜¸ ì¡°ì •
+    	Integer blockLastPageNum = (totalLastPageNum > curPageNum + BLOCK_PAGE_NUM_COUNT -1)	//í˜„ì¬ í˜ì´ì§€ ê¸°ì¤€ ë¸”ëŸ­ì˜ ë§ˆì§€ë§‰ í˜ì´ì§€ ë²ˆí˜¸ ê³„ì‚° 
     					? curPageNum + BLOCK_PAGE_NUM_COUNT -1
     					: totalLastPageNum;
-    	for(int val = curPageNum, idx = 0; val <= blockLastPageNum; val++, idx++) {  //ÆäÀÌÁö ¹øÈ£ ÇÒ´ç
+    	for(int val = curPageNum, idx = 0; val <= blockLastPageNum; val++, idx++) {  //í˜ì´ì§€ ë²ˆí˜¸ í• ë‹¹
     		pageList[idx] = val;
     	}
     	

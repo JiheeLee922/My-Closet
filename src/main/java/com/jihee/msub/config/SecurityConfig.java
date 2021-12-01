@@ -32,9 +32,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		
-		/*	spring security ¿¡¼­ ¸ğµç ÀÎÁõÀº AuthenticationManager¸¦ ÅëÇØ ÀÌ·ïÁü.
-		 *  AuthenticationManager »ı¼ºÇÏ·Á¸é AuthenticationManagerBuilder »ç¿ë.
-		 *  ÀÎÁõÀ» À§ÇØ UserDetailService¸¦ ÅëÇØ ÇÊ¿äÇÑ Á¤º¸ °®°í ¿À´Âµ¥ ¿©±â¼± memberService¿¡¼­ Ã³¸®*/
+		/*	spring security ì—ì„œ ëª¨ë“  ì¸ì¦ì€ AuthenticationManagerë¥¼ í†µí•´ ì´ë¤„ì§.
+		 *  AuthenticationManager ìƒì„±í•˜ë ¤ë©´ AuthenticationManagerBuilder ì‚¬ìš©.
+		 *  ì¸ì¦ì„ ìœ„í•´ UserDetailServiceë¥¼ í†µí•´ í•„ìš”í•œ ì •ë³´ ê°–ê³  ì˜¤ëŠ”ë° ì—¬ê¸°ì„  memberServiceì—ì„œ ì²˜ë¦¬*/
 		
 		auth.userDetailsService(memberService).passwordEncoder(passwordEncoder());
 	}
@@ -42,8 +42,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		
-		/*	WebSecurity´Â FilterChainProxy¸¦(security¿¡¼­ »ç¿ëÇÏ´Â filter¸ğÀ½) »ı¼ºÇÏ´Â ÇÊÅÍ 
-		 * ¾Æ·¡ °æ·ÎÀÇ ÆÄÀÏµéÀ» Spring Security°¡ ¹«½ÃÇÒ ¼ö ÀÖµµ·Ï ¼³Á¤. ±âÁØÀº resources/static */
+		/*	WebSecurityëŠ” FilterChainProxyë¥¼(securityì—ì„œ ì‚¬ìš©í•˜ëŠ” filterëª¨ìŒ) ìƒì„±í•˜ëŠ” í•„í„° 
+		 * ì•„ë˜ ê²½ë¡œì˜ íŒŒì¼ë“¤ì„ Spring Securityê°€ ë¬´ì‹œí•  ìˆ˜ ìˆë„ë¡ ì„¤ì •. ê¸°ì¤€ì€ resources/static */
 		
 		web.ignoring().antMatchers("/css/**", "/js/**", "/img/**", "/lib/**");
 	}
@@ -51,31 +51,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-		/*	HttpSecurity¸¦ ÅëÇØ HTTP¿äÃ»¿¡ ´ëÇÑ À¥±â¹İ º¸¾ÈÀ» ±¸¼ºÇÑ´Ù. 
-		 * authorizeRequests -> HttpServletRequests¿¡ µû¶ó Á¢±Ù Á¦ÇÑ. antMatchers ¸Ş¼­µå·Î Æ¯Á¤ °æ·Î ÁöÁ¤ÇØ ¿ªÇÒ¿¡ µû¸¥ Á¢±Ù ¼³Á¤ Àâ¾ÆÁØ´Ù
-		 * formLogin -> form ±â¹İÀ¸·Î ÀÎÁõÇÏµµ·ÏÇÔ. ·Î±×ÀÎ Á¤º¸´Â ±âº»ÀûÀ¸·Î HttpSession ÀÌ¿ë*/
+		/*	HttpSecurityë¥¼ í†µí•´ HTTPìš”ì²­ì— ëŒ€í•œ ì›¹ê¸°ë°˜ ë³´ì•ˆì„ êµ¬ì„±í•œë‹¤. 
+		 * authorizeRequests -> HttpServletRequestsì— ë”°ë¼ ì ‘ê·¼ ì œí•œ. antMatchers ë©”ì„œë“œë¡œ íŠ¹ì • ê²½ë¡œ ì§€ì •í•´ ì—­í• ì— ë”°ë¥¸ ì ‘ê·¼ ì„¤ì • ì¡ì•„ì¤€ë‹¤
+		 * formLogin -> form ê¸°ë°˜ìœ¼ë¡œ ì¸ì¦í•˜ë„ë¡í•¨. ë¡œê·¸ì¸ ì •ë³´ëŠ” ê¸°ë³¸ì ìœ¼ë¡œ HttpSession ì´ìš©*/
 		
 		http.authorizeRequests()
-				//ÆäÀÌÁö ±ÇÇÑ ¼³Á¤
-				.antMatchers("/admin/**").hasRole("ADMIN")		//ÇØ´ç °æ·Î´Â ADMIN ·ÑÀ» °¡Áø »ç¿ëÀÚ¸¸ Á¢±Ù °¡´É
+				//í˜ì´ì§€ ê¶Œí•œ ì„¤ì •
+				.antMatchers("/admin/**").hasRole("ADMIN")		//í•´ë‹¹ ê²½ë¡œëŠ” ADMIN ë¡¤ì„ ê°€ì§„ ì‚¬ìš©ìë§Œ ì ‘ê·¼ ê°€ëŠ¥
 				.antMatchers("/user/myinfo").hasRole("MEMBER")
 				.antMatchers("/board/**").hasRole("MEMBER")
 				.antMatchers("/chat/**").hasRole("MEMBER")
-				.antMatchers("/**").permitAll()		//	<-> .anyRequest().authenticated() ¸ğµç »ç¿ëÀÚ Á¢±Ù°¡´É
-			.and()	//·Î±×ÀÎ ¼³Á¤
+				.antMatchers("/**").permitAll()		//	<-> .anyRequest().authenticated() ëª¨ë“  ì‚¬ìš©ì ì ‘ê·¼ê°€ëŠ¥
+			.and()	//ë¡œê·¸ì¸ ì„¤ì •
 				.formLogin()
-				.loginPage("/user/login")		// ±âº» Á¦°øµÇ´Â form ¸»°í Ä¿½ºÅÒ ·Î±×ÀÎ form À» ¾²°í ½ÍÀ» ‹š 
-				.defaultSuccessUrl("/user/login/result")	//·Î±×ÀÎ ¼º°øµÆÀ» ‹š ÀÌµ¿ ÆäÀÌÁö
+				.loginPage("/user/login")		// ê¸°ë³¸ ì œê³µë˜ëŠ” form ë§ê³  ì»¤ìŠ¤í…€ ë¡œê·¸ì¸ form ì„ ì“°ê³  ì‹¶ì„ ë–„ 
+				.defaultSuccessUrl("/user/login/result")	//ë¡œê·¸ì¸ ì„±ê³µëì„ ë–„ ì´ë™ í˜ì´ì§€
 				.successHandler(successHandler())
-				//.usernameParameter("mbrId")  ·Î±×ÀÎ form¿¡¼± nameÀÌ usernameÀ» ¾ÆÀÌµğ·Î ÀÎ½ÄÇÏ´Âµ¥ ´Ù¸¥°É·Î ÇÏ°í ½ÍÀ» ¶§
+				//.usernameParameter("mbrId")  ë¡œê·¸ì¸ formì—ì„  nameì´ usernameì„ ì•„ì´ë””ë¡œ ì¸ì‹í•˜ëŠ”ë° ë‹¤ë¥¸ê±¸ë¡œ í•˜ê³  ì‹¶ì„ ë•Œ
 				.permitAll()
-			.and()	//·Î±×¾Æ¿ô ¼³Á¤
+			.and()	//ë¡œê·¸ì•„ì›ƒ ì„¤ì •
 				.logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))	//·Î±×¾Æ¿ôÀÇ ±âº» url ¸»°í Ä¿½ºÅÒÇÏ°í ½ÍÀ» ¶§
+				.logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))	//ë¡œê·¸ì•„ì›ƒì˜ ê¸°ë³¸ url ë§ê³  ì»¤ìŠ¤í…€í•˜ê³  ì‹¶ì„ ë•Œ
 				.logoutSuccessUrl("/user/logout/result")
-				.invalidateHttpSession(true)	//HTTP ¼¼¼Ç ÃÊ±âÈ­
-				//.deleteCookies("Å°¸í")  ·Î±×¾Æ¿ô ½Ã Æ¯Á¤ ÄíÅ° Á¦°ÅÇÏ°í ½ÍÀ» ‹š 
-			.and()	//403 ¿¹¿ÜÃ³¸® ÇÚµé¸µ
+				.invalidateHttpSession(true)	//HTTP ì„¸ì…˜ ì´ˆê¸°í™”
+				//.deleteCookies("í‚¤ëª…")  ë¡œê·¸ì•„ì›ƒ ì‹œ íŠ¹ì • ì¿ í‚¤ ì œê±°í•˜ê³  ì‹¶ì„ ë–„ 
+			.and()	//403 ì˜ˆì™¸ì²˜ë¦¬ í•¸ë“¤ë§
 				.exceptionHandling().accessDeniedPage("/user/denied");
 		
 	}

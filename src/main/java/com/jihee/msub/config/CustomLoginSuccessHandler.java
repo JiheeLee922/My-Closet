@@ -12,16 +12,16 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 
 
 /**
- * ·Î±×ÀÎ ¼º°ø ½Ã ÇÚµé·¯
+ * ë¡œê·¸ì¸ ì„±ê³µ ì‹œ í•¸ë“¤ëŸ¬
  * @author JiheeLee
  * @since 2021.11.03
  * @version 1.0
  * @see <pre>
- *  == °³Á¤ÀÌ·Â(Modification Information) ==
+ *  == ê°œì •ì´ë ¥(Modification Information) ==
  *   
- *   ¼öÁ¤ÀÏ      	  ¼öÁ¤ÀÚ       			   ¼öÁ¤³»¿ë
+ *   ìˆ˜ì •ì¼      	  ìˆ˜ì •ì       			   ìˆ˜ì •ë‚´ìš©
  *  -------      --------    ---------------------------
- *   2021.11.03  JiheeLee       	  ÃÖÃÊ »ı¼º
+ *   2021.11.03  JiheeLee       	  ìµœì´ˆ ìƒì„±
  * 
  * </pre>
  */

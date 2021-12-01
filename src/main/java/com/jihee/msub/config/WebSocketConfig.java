@@ -18,7 +18,7 @@ import lombok.AllArgsConstructor;
 @Configuration
 @EnableWebSocketMessageBroker
 @AllArgsConstructor
-public class WebSocketConfig implements WebSocketMessageBrokerConfigurer { //implements WebSocketConfigurer { ±âÁ¸¿¡¼­ STOMP ¾²±âÀ§ÇØ º¯°æ
+public class WebSocketConfig implements WebSocketMessageBrokerConfigurer { //implements WebSocketConfigurer { ê¸°ì¡´ì—ì„œ STOMP ì“°ê¸°ìœ„í•´ ë³€ê²½
 
 	//SocketTextHandler socketTextHandler;
 
@@ -26,19 +26,19 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer { //imp
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
 
 		registry.addEndpoint("/stomp/chat")
-				.setAllowedOrigins("http://localhost:8080") 	// *·Î ÇÏ¸é 404¹ß»ı..
+				.setAllowedOrigins("http://localhost:8080") 	// *ë¡œ í•˜ë©´ 404ë°œìƒ..
 				.withSockJS();
 	}
 
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry registry) {
 		
-		registry.setPathMatcher(new AntPathMatcher(".")); //urlÀ» chat/room/3 -> chat.room.3À¸·Î ÂüÁ¶ÇÏ±â À§ÇÑ ¼³Á¤
+		registry.setPathMatcher(new AntPathMatcher(".")); //urlì„ chat/room/3 -> chat.room.3ìœ¼ë¡œ ì°¸ì¡°í•˜ê¸° ìœ„í•œ ì„¤ì •
 		
-		registry.setApplicationDestinationPrefixes("/pub");	//SEND¿äÃ» Ã³¸®
+		registry.setApplicationDestinationPrefixes("/pub");	//SENDìš”ì²­ ì²˜ë¦¬
 		
-		//registry.enableSimpleBroker("/sub");	//ÇØ´ç °æ·Î·Î SimpleBroker µî·Ï. SimpleBroker´Â ÇØ´çÇÏ´Â °æ·Î¸¦ SUBSCRIBEÇÏ´Â client¿¡°Ô ¸Ş¼¼Áö Àü´Ş
-		registry.enableStompBrokerRelay("/queue", "/topic", "/exchange", "/amq/queue"); //ÀÌ°Ç ¿ÜºÎ Message Broker (RabbitMQ, ActiveMQµî)¿¡ ¸Ş¼¼Áö Àü´Ş.  
+		//registry.enableSimpleBroker("/sub");	//í•´ë‹¹ ê²½ë¡œë¡œ SimpleBroker ë“±ë¡. SimpleBrokerëŠ” í•´ë‹¹í•˜ëŠ” ê²½ë¡œë¥¼ SUBSCRIBEí•˜ëŠ” clientì—ê²Œ ë©”ì„¸ì§€ ì „ë‹¬
+		registry.enableStompBrokerRelay("/queue", "/topic", "/exchange", "/amq/queue"); //ì´ê±´ ì™¸ë¶€ Message Broker (RabbitMQ, ActiveMQë“±)ì— ë©”ì„¸ì§€ ì „ë‹¬.  
 	}
 	
 	
@@ -46,11 +46,11 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer { //imp
 	
 	
 	
-//	@Override ±âÁ¸¿¡¼­ STOMP ¾²±âÀ§ÇØ º¯°æ
+//	@Override ê¸°ì¡´ì—ì„œ STOMP ì“°ê¸°ìœ„í•´ ë³€ê²½
 //	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-//		registry.addHandler(socketTextHandler, "/chat") //chatÀ¸·Î È£ÃâÀÌ ¿À¸é socketTextHandler ½ÇÇà
+//		registry.addHandler(socketTextHandler, "/chat") //chatìœ¼ë¡œ í˜¸ì¶œì´ ì˜¤ë©´ socketTextHandler ì‹¤í–‰
 ////				.setAllowedOrigins("*");
-//				.withSockJS(); //SockJs ÀÌ¿ëÇÏ·Á°í Ãß°¡ cf) https://dev-gorany.tistory.com/224
+//				.withSockJS(); //SockJs ì´ìš©í•˜ë ¤ê³  ì¶”ê°€ cf) https://dev-gorany.tistory.com/224
 //	}
 
 }

@@ -13,12 +13,12 @@ import com.jihee.msub.chat.dto.ChatDTO;
 import lombok.RequiredArgsConstructor;
 
 
-/** StompChatController¿Í ºñ±³ÇÏ¸é¼­ °øºÎÇÏ±â!*/
+/** StompChatControllerì™€ ë¹„êµí•˜ë©´ì„œ ê³µë¶€í•˜ê¸°!*/
 @Controller
 @RequiredArgsConstructor
 public class StompRabbitController {
 	
-	private final RabbitTemplate template;  // Àü¿¡´Â SimpleMessagingTemplate »ç¿ëÇß´Ù.
+	private final RabbitTemplate template;  // ì „ì—ëŠ” SimpleMessagingTemplate ì‚¬ìš©í–ˆë‹¤.
 	private final static String CHAT_EXCHANGE_NAME = "chat.exchange";
 	private final static String CHAT_TOPIC = "amq.topic";
 	private final static String CHAT_QUEUE_NAME = "chat.queue";
@@ -27,9 +27,9 @@ public class StompRabbitController {
 	
 	@MessageMapping("chat.enter.{chatRoomId}")
 	public void enter(ChatDTO chat, @DestinationVariable String chatRoomId) {
-		//@DestinationVariable Àº Web¿¡¼­ »ç¿ëÇÒ ¶§ @PathVariable°ú °°Àº°Å. @MessageMappingÀÏ¶© ÀÌ°É ¾´´Ù.
+		//@DestinationVariable ì€ Webì—ì„œ ì‚¬ìš©í•  ë•Œ @PathVariableê³¼ ê°™ì€ê±°. @MessageMappingì¼ë• ì´ê±¸ ì“´ë‹¤.
 		
-		chat.setMessage("ÀÔÀåÇÏ¼Ì½À´Ï´Ù.");
+		chat.setMessage("ì…ì¥í•˜ì…¨ìŠµë‹ˆë‹¤.");
 		chat.setRegDate(LocalDateTime.now()); 
 		
 		template.convertAndSend(CHAT_TOPIC, ROUTING_KEY+ chatRoomId, chat); //Topic Destination
@@ -46,11 +46,10 @@ public class StompRabbitController {
 	}
 	
 	
-	/** receive()´Â ´Ü¼øÈ÷ Å¥¿¡ µé¾î¿Â ¸Ş¼¼Áö¸¦ ¼Òºñ¸¸ ÇÑ´Ù.( µğ¹ö±× ¿ëµµ)
-	 * RabbitListener ¾î³ëÅ×ÀÌ¼ÇÀº chat.queue ¶ó´Â Queue¸¦ ±¸µ¶ÇØ ±× Å¥¿¡ µé¾î¿Â ¸Ş¼¼Áö¸¦ ¼ÒºñÇÏ´Â ¼ÒºñÀÚ°¡ µÇ°Ú´Ù´Â ¾î³ëÅ×ÀÌ¼Ç.*/
+	/** receive()ëŠ” ë‹¨ìˆœíˆ íì— ë“¤ì–´ì˜¨ ë©”ì„¸ì§€ë¥¼ ì†Œë¹„ë§Œ í•œë‹¤.( ë””ë²„ê·¸ ìš©ë„)
+	 * RabbitListener ì–´ë…¸í…Œì´ì…˜ì€ chat.queue ë¼ëŠ” Queueë¥¼ êµ¬ë…í•´ ê·¸ íì— ë“¤ì–´ì˜¨ ë©”ì„¸ì§€ë¥¼ ì†Œë¹„í•˜ëŠ” ì†Œë¹„ìê°€ ë˜ê² ë‹¤ëŠ” ì–´ë…¸í…Œì´ì…˜.*/
 	@RabbitListener(queues = CHAT_QUEUE_NAME)
 	public void receive(ChatDTO chat) {
 		System.out.println("received : "+chat.getMessage());
 	}
-	
 }

@@ -11,7 +11,7 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 
-/** ÇØ´ç ÄÁÆ®·Ñ·¯´Â STOMP Àû¿ë ÈÄ »ç¿ë¾ÈÇÔ. Stomp Àû¿ë Àü¿¡´Â ÇÚµé·¯·Î Á÷Á¢ ¼¼¼Ç °ü¸®ÇßÁö¸¸ Stomp Àû¿ë ÈÄ¿¡´Â ÇÊ¿ä ¾ø¾îÁü*/
+/** í•´ë‹¹ ì»¨íŠ¸ë¡¤ëŸ¬ëŠ” STOMP ì ìš© í›„ ì‚¬ìš©ì•ˆí•¨. Stomp ì ìš© ì „ì—ëŠ” í•¸ë“¤ëŸ¬ë¡œ ì§ì ‘ ì„¸ì…˜ ê´€ë¦¬í–ˆì§€ë§Œ Stomp ì ìš© í›„ì—ëŠ” í•„ìš” ì—†ì–´ì§*/
 @Deprecated
 @Component
 public class SocketTextHandler extends TextWebSocketHandler{
@@ -19,7 +19,7 @@ public class SocketTextHandler extends TextWebSocketHandler{
 	HashMap<String, WebSocketSession> sessions = new HashMap<>();
 
 	
-	//client¿¡¼­ ¸Ş½ÃÁö°¡ ¼­¹ö·Î Àü¼ÛµÉ ¶§ ½ÇÇàµÇ´Â ÇÔ¼ö
+	//clientì—ì„œ ë©”ì‹œì§€ê°€ ì„œë²„ë¡œ ì „ì†¡ë  ë•Œ ì‹¤í–‰ë˜ëŠ” í•¨ìˆ˜
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		String payload = message.getPayload();
@@ -29,21 +29,21 @@ public class SocketTextHandler extends TextWebSocketHandler{
 	}
 
 	
-	//¼¼¼Ç »ı¼ºµÉ ¶§ ½ÃÀÛµÇ´Â ÇÔ¼ö
+	//ì„¸ì…˜ ìƒì„±ë  ë•Œ ì‹œì‘ë˜ëŠ” í•¨ìˆ˜
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		super.afterConnectionEstablished(session);
 		sessions.put(session.getId(), session);
 		
-		//sendMessage(new TextMessage(session.getId()+"´ÔÀÌ µé¾î¿À¼Ì½À´Ï´Ù. "));
+		//sendMessage(new TextMessage(session.getId()+"ë‹˜ì´ ë“¤ì–´ì˜¤ì…¨ìŠµë‹ˆë‹¤. "));
 	}
 	
 	
-	//¼¼¼Ç ³¡³¯ ¶§ ½ÇÇàµÇ´Â ÇÔ¼ö
+	//ì„¸ì…˜ ëë‚  ë•Œ ì‹¤í–‰ë˜ëŠ” í•¨ìˆ˜
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		sessions.remove(session.getId());
-		//sendMessage(new TextMessage(session.getId()+"´ÔÀÌ ³ª°¡¼Ì½À´Ï´Ù. "));
+		//sendMessage(new TextMessage(session.getId()+"ë‹˜ì´ ë‚˜ê°€ì…¨ìŠµë‹ˆë‹¤. "));
 		
 		super.afterConnectionClosed(session, status);
 	}

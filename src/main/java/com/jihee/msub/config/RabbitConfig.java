@@ -26,21 +26,21 @@ public class RabbitConfig {
 	private static final String CHAT_EXCHANGE_NAME = "chat.exchange";
 	private static final String ROUTING_KEY = "room.*";
 
-    /** Queue µî·Ï -> Å¬¶óÀÌ¾ğÆ® 1¸í ´ç 1°³°¡ »ı±è*/
+    /** Queue ë“±ë¡ -> í´ë¼ì´ì–¸íŠ¸ 1ëª… ë‹¹ 1ê°œê°€ ìƒê¹€*/
     @Bean
     public Queue queue(){ return new Queue(CHAT_QUEUE_NAME, true); }
 
-    /** Exchange µî·Ï -> queueµéÀ» ´Ù ¹ÙÀÎµù ÇÏ°í ÀÖ°í, ¸Ş¼¼Áö°¡ ¿À¸é routing key°¡ °°Àº Å¥¿¡ ¸Ş¼¼Áö º¸³½´Ù(?) */
+    /** Exchange ë“±ë¡ -> queueë“¤ì„ ë‹¤ ë°”ì¸ë”© í•˜ê³  ìˆê³ , ë©”ì„¸ì§€ê°€ ì˜¤ë©´ routing keyê°€ ê°™ì€ íì— ë©”ì„¸ì§€ ë³´ë‚¸ë‹¤(?) */
     @Bean
     public TopicExchange exchange(){ return new TopicExchange(CHAT_EXCHANGE_NAME); }
 
-    /** Exchange¿Í Queue ¹ÙÀÎµù -> queue¸¦ exchange¿¡ routing key °¡Áö°í ¹ÙÀÎµùÇÑ´Ù*/
+    /** Exchangeì™€ Queue ë°”ì¸ë”© -> queueë¥¼ exchangeì— routing key ê°€ì§€ê³  ë°”ì¸ë”©í•œë‹¤*/
     @Bean
     public Binding binding(Queue queue, TopicExchange exchange) {
         return BindingBuilder.bind(queue).to(exchange).with(ROUTING_KEY);
     }
 
-    /**  messageConverter¸¦ Ä¿½ºÅÍ¸¶ÀÌÂ¡ ÇÏ±â À§ÇØ Bean »õ·Î µî·Ï */
+    /**  messageConverterë¥¼ ì»¤ìŠ¤í„°ë§ˆì´ì§• í•˜ê¸° ìœ„í•´ Bean ìƒˆë¡œ ë“±ë¡ */
     @Bean
     public RabbitTemplate rabbitTemplate(){
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory());
@@ -60,7 +60,7 @@ public class RabbitConfig {
     
     
     
-    /** Spring¿¡¼­ ÀÚµ¿»ı¼ºÇØÁÖ´Â ConnectionFactory´Â SimpleConnectionFactoryÀÎ°¡? ±×°Çµ¥ ¿©±â¼­ »ç¿ëÇÏ´Â °Ç CachingConnectionFacotry¶ó »õ·Î µî·ÏÇØÁØ´Ù. */
+    /** Springì—ì„œ ìë™ìƒì„±í•´ì£¼ëŠ” ConnectionFactoryëŠ” SimpleConnectionFactoryì¸ê°€? ê·¸ê±´ë° ì—¬ê¸°ì„œ ì‚¬ìš©í•˜ëŠ” ê±´ CachingConnectionFacotryë¼ ìƒˆë¡œ ë“±ë¡í•´ì¤€ë‹¤. */
     @Bean
     public ConnectionFactory connectionFactory(){
         CachingConnectionFactory factory = new CachingConnectionFactory();
@@ -70,7 +70,7 @@ public class RabbitConfig {
         return factory;
     }
     
-    /** LocalDateTime serializableÀ» À§ÇØ*/
+    /** LocalDateTime serializableì„ ìœ„í•´*/
     @Bean
     public Jackson2JsonMessageConverter jsonMessageConverter(){
         ObjectMapper objectMapper = new ObjectMapper();

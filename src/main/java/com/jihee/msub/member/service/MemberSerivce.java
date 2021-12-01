@@ -34,7 +34,7 @@ public class MemberSerivce implements UserDetailsService{
 
 	@Transactional
 	public Long joinUser(MemberDto memberDto) {
-		//ºñ¹Ğ¹øÈ£ ¾ÏÈ£È­
+		//ë¹„ë°€ë²ˆí˜¸ ì•”í˜¸í™”
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		memberDto.setPassword(passwordEncoder.encode(memberDto.getPassword())); 
 		
@@ -56,7 +56,7 @@ public class MemberSerivce implements UserDetailsService{
 			authorities.add(new SimpleGrantedAuthority(Role.MEMBER.getValue()));
 		}
 		
-		//SpringSecurity¿¡¼­ Á¦°øÇÏ´Â UserDetails¸¦ ±¸ÇöÇÑ User °´Ã¼ ¹İÈ¯. 
+		//SpringSecurityì—ì„œ ì œê³µí•˜ëŠ” UserDetailsë¥¼ êµ¬í˜„í•œ User ê°ì²´ ë°˜í™˜. 
 		return new User(userEntity.getEmail(), userEntity.getPassword(), authorities);
 	}
 	

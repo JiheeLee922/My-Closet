@@ -15,16 +15,16 @@ public class MailHandler {
 	
 	private JavaMailSender sender;
 	private MimeMessage message;
-	private MimeMessageHelper messageHelper;	// spring¿¡¼­ Á¦°øÇÏ´Â ÇïÆÛ °´Ã¼. HTML·¹ÀÌ¾Æ¿ô, ÀÌ¹ÌÁö»ğÀÔ, Ã·ºÎÆÄÀÏ µî MIME ¸Ş¼¼Áö ÀÛ¼º°¡´É
+	private MimeMessageHelper messageHelper;	// springì—ì„œ ì œê³µí•˜ëŠ” í—¬í¼ ê°ì²´. HTMLë ˆì´ì•„ì›ƒ, ì´ë¯¸ì§€ì‚½ì…, ì²¨ë¶€íŒŒì¼ ë“± MIME ë©”ì„¸ì§€ ì‘ì„±ê°€ëŠ¥
 	
-	//»ı¼ºÀÚ
+	//ìƒì„±ì
 	public MailHandler(JavaMailSender jsender) throws MessagingException {
 		this.sender = jsender;
 		message = jsender.createMimeMessage();
 		messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 	}
 	
-	//ÀÌ¸ŞÀÏ Á¤º¸ set
+	//ì´ë©”ì¼ ì •ë³´ set
 	public void setFrom(String fromAddress) throws MessagingException {
 		messageHelper.setFrom(fromAddress);
 	}
@@ -38,8 +38,8 @@ public class MailHandler {
 		messageHelper.setText(text, useHtml);
 	}
 	
-	//Ã·ºÎÆÄÀÏ
-	public void setAttach(String displayFileName , String pathToAttachment) //¸ŞÀÏ¿¡ ³ëÃâµÉ °æ·Î, ½ÇÁ¦ ÆÄÀÏ À§Ä¡ 
+	//ì²¨ë¶€íŒŒì¼
+	public void setAttach(String displayFileName , String pathToAttachment) //ë©”ì¼ì— ë…¸ì¶œë  ê²½ë¡œ, ì‹¤ì œ íŒŒì¼ ìœ„ì¹˜ 
 			throws MessagingException, IOException {
 		File file = new ClassPathResource(pathToAttachment).getFile();
 		FileSystemResource fsr = new FileSystemResource(file);
@@ -47,7 +47,7 @@ public class MailHandler {
 		messageHelper.addAttachment(displayFileName, fsr); 
 	}
 	
-	//ÀÌ¹ÌÁö»ğÀÔ
+	//ì´ë¯¸ì§€ì‚½ì…
 	public void setInline(String contentId, String pathToInline) throws MessagingException, IOException {
 		File file = new ClassPathResource(pathToInline).getFile();
 		FileSystemResource fsr = new FileSystemResource(file);
@@ -55,7 +55,7 @@ public class MailHandler {
 		messageHelper.addInline(contentId, fsr);
 	}
 	
-	//¹ß¼Û
+	//ë°œì†¡
 	public void send() {
 		try {
 			sender.send(message);

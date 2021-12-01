@@ -16,7 +16,7 @@ public class ChatRoomDTO {
 	private String roomId ;
 	private String name;
 	private Set<WebSocketSession> sessions = new HashSet<>();
-	//webSocketSessionÀº Spring¿¡¼­ WebSocket ConnectionÀÌ ¸Î¾îÁø ¼¼¼Ç
+	//webSocketSessionì€ Springì—ì„œ WebSocket Connectionì´ ë§ºì–´ì§„ ì„¸ì…˜
 	
 	public static ChatRoomDTO create(String name) {
 		ChatRoomDTO room = new ChatRoomDTO();
