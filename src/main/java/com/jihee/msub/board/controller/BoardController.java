@@ -36,7 +36,7 @@ public class BoardController {
 	@GetMapping("/list")
 	public String list(Model model, @ApiParam(value = "게시판페이지번호", required = true, example = "1") @RequestParam(value = "page", defaultValue = "1") Integer pageNum , @RequestParam(value = "keyword", required = false) String keyword) {
 		List<BoardDto> boardList = new ArrayList<>();
-		boardList = boardService.getBoardList(pageNum, keyword);
+		boardList = boardService.getBoardListDsl(pageNum, keyword);
 		Integer[] pageList = boardService.getPageList(pageNum,keyword);
 		
 		model.addAttribute("boardList",boardList);

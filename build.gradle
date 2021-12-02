@@ -1,7 +1,9 @@
 plugins {
 	id 'org.springframework.boot' version '2.5.3'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
+	//querydsl
+    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
+    id 'java'
 }
 
 group = 'com.jihee'
@@ -18,6 +20,7 @@ repositories {
 	mavenCentral()
 	jcenter()
 }
+
 
 ext {
     set('springCloudVersion', "Greenwich.SR1")
@@ -61,18 +64,20 @@ dependencies {
     runtimeOnly 'com.amazonaws:aws-lambda-java-log4j2:1.2.0'
     implementation 'com.google.code.gson:gson:2.8.6'
     
-    //¿ÜºÎ ºê·ÎÄ¿¸¦ »ç¿ëÇÏ±â À§ÇØ
+    //ì™¸ë¶€ ë¸Œë¡œì»¤ë¥¼ ì‚¬ìš©í•˜ê¸° ìœ„í•´
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-reactor-netty', version: '2.4.6'
 	
-	//jackson2json¿¡¼­ LocalDateTimeÀ» handling ÇÏ±â À§ÇØ
+	//jackson2jsonì—ì„œ LocalDateTimeì„ handling í•˜ê¸° ìœ„í•´
 	implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.12.4'
 	
 	implementation 'org.springframework.boot:spring-boot-starter-amqp'
 	testImplementation 'org.springframework.amqp:spring-rabbit-test'
 	
-	/* ---¾Æ·¡´Â ¼±ÅÃ--- */
+	/* ---ì•„ë˜ëŠ” ì„ íƒ--- */
 	implementation group: 'org.webjars', name: 'sockjs-client', version: '1.1.2'
 	implementation group: 'org.webjars', name: 'stomp-websocket', version: '2.3.3-1'
+	
+	implementation 'com.querydsl:querydsl-jpa'
 }
 
 test {
@@ -80,9 +85,9 @@ test {
 }
 
 task buildZip(type: Zip) {
-    from compileJava  			//ÇÔ¼öÀÇ Å¬·¡½º¸¦ ÄÄÆÄÀÏ
-    from processResources		//Java ÇÁ·ÎÁ§Æ® ¸®¼Ò½º¸¦ ´ë»ó µğ·ºÅÍ¸®¿¡ º¹»çÇÏ°í ÀáÀçÀûÀ¸·Î Ã³¸®
-    into('lib') {				//ºôµåÀÇ Å¬·¡½º °æ·Î¿¡¼­ lib¶ó´Â Æú´õ·Î Á¾¼Ó¼º ¶óÀÌºê·¯¸®¸¦ º¹»ç
+    from compileJava  			//í•¨ìˆ˜ì˜ í´ë˜ìŠ¤ë¥¼ ì»´íŒŒì¼
+    from processResources		//Java í”„ë¡œì íŠ¸ ë¦¬ì†ŒìŠ¤ë¥¼ ëŒ€ìƒ ë””ë ‰í„°ë¦¬ì— ë³µì‚¬í•˜ê³  ì ì¬ì ìœ¼ë¡œ ì²˜ë¦¬
+    into('lib') {				//ë¹Œë“œì˜ í´ë˜ìŠ¤ ê²½ë¡œì—ì„œ libë¼ëŠ” í´ë”ë¡œ ì¢…ì†ì„± ë¼ì´ë¸ŒëŸ¬ë¦¬ë¥¼ ë³µì‚¬
         from configurations.runtimeClasspath
     }
 }
@@ -96,5 +101,27 @@ java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
 }
+
+
+//querydsl ì„¤ì •
+def querydslDir = "$buildDir/generated/querydsl"
+
+querydsl {
+    jpa = true
+    querydslSourcesDir = querydslDir
+}
+
+sourceSets {
+    main.java.srcDir querydslDir
+}
+
+configurations {
+    querydsl.extendsFrom compileClasspath
+}
+
+compileQuerydsl {
+    options.annotationProcessorPath = configurations.querydsl
+}
+//querydsl ë
 
 build.dependsOn buildZip

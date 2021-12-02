@@ -3,6 +3,7 @@ package com.jihee.msub.board.dto;
 import java.time.LocalDateTime;
 
 import com.jihee.msub.board.domain.entity.BoardEntity;
+import com.jihee.msub.member.dto.MemberDto;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -23,6 +24,8 @@ public class BoardDto {
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
     
+    private MemberDto member;
+    
     public BoardEntity toEntity() {
     	BoardEntity boardEntity = BoardEntity.builder()
     			.id(id)
@@ -34,12 +37,13 @@ public class BoardDto {
     }
     
     @Builder
-    public BoardDto(Long id, String title, String content, String writer, LocalDateTime createdDate, LocalDateTime modifiedDate) {
+    public BoardDto(Long id, String title, String content, String writer, LocalDateTime createdDate, LocalDateTime modifiedDate, MemberDto member) {
     	this.id = id;
 		this.writer = writer;
 		this.title = title;
 		this.content = content;
 		this.createdDate = createdDate;
-		this.modifiedDate = modifiedDate;		
+		this.modifiedDate = modifiedDate;
+		this.member = member;
     }
 }
