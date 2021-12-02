@@ -34,12 +34,21 @@ public class ChatRoomDTO {
 	
 	
 	public ChatRoomEntity toEntity() {
-		ChatRoomEntity entity = ChatRoomEntity.builder()
-				.id(id)
-				.room_name(roomName)
-				.member(member.toEntity())
-				.build();
-		return entity;
+		if(this.member == null) {
+			ChatRoomEntity entity = ChatRoomEntity.builder()
+					.id(id)
+					.room_name(roomName)
+					.build();
+			return entity;
+			
+		}else {
+			ChatRoomEntity entity = ChatRoomEntity.builder()
+					.id(id)
+					.room_name(roomName)
+					.member(member.toEntity())
+					.build();
+			return entity;
+		}
 				
 	}
 

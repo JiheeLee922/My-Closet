@@ -28,7 +28,7 @@ public class ChatEntity extends TimeEntity{
 	private Long id;
 	
 	@Column(length = 200, nullable = false)
-	private String content;
+	private String message;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	private ChatRoomEntity chatRoom;
@@ -37,9 +37,9 @@ public class ChatEntity extends TimeEntity{
 	private MemberEntity member;
 
 	@Builder
-	public ChatEntity(Long id, String content, MemberEntity member,  ChatRoomEntity chatRoom) {
+	public ChatEntity(Long id, String message, MemberEntity member,  ChatRoomEntity chatRoom) {
 		this.id = id;
-		this.content = content;
+		this.message = message;
 		this.member = member;
 		this.chatRoom = chatRoom;
 	}

@@ -48,10 +48,10 @@
 		const btnSend = document.querySelector('#button-send');
 		
 		const chatRoomId = "${chatRoomId}";
-		const nickname = "${nickname}";
+		const nickname = "${member.nickname}";
 		
 		const sockJs = new SockJS("/stomp/chat");
-		const stomp = Stomp.over(sockJs);
+		stomp = Stomp.over(sockJs);
 		
 		stomp.heartbeat.outgoing = 0 ; //rabbit에선 heartbeat 안먹힘
 		stomp.heartbeat.incoming = 0 ;
@@ -113,7 +113,7 @@
 			
 			//입장 메세지
 			stomp.send('/pub/chat.enter.'+chatRoomId, {}, JSON.stringify({ 
-				memberId: 1,
+				memberId: "${member.id}",
 	            nickname: nickname
 	        }));
 			
@@ -126,7 +126,7 @@
 			
 			stomp.send('/pub/chat.message.'+chatRoomId, {}, JSON.stringify({
 				message: message,
-				memberId: 1,
+				memberId: "${member.id}",
 	            nickname: nickname
 	        }));
 			
@@ -143,6 +143,14 @@
 	});
 	
 	
+	function disconnect(){
+		debugger;
+		if(stomp !== null){
+			stomp.disconnect();
+		}
+	}
+	
+	
 </script>
 <body>
     <div>
@@ -150,11 +158,31 @@
 	        <div class="container">
 	            <div class="col-6">
 	                <h1>● Room No. ${chatRoomId}</h1>
-    				<h1>● Nickname : ${nickname}</h1>
+    				<h1>● Nickname : ${member.nickname}</h1>
 	            </div>
 	            <button class="btn btn-outline-secondary" type="button" onclick="disconnect()">나가기</button>
 	            <div style="width: 720px;">
-	                <div id="msgArea" class="col"></div>
+	                <div id="msgArea" class="col">
+	                	<c:forEach items="${msg}" var="msg">
+	                		<c:if test="${msg.memberId == member.id}">
+	                			<div class='col-6'>
+	                				<div class='alert alert-secondary'>
+	                					<p>${msg.memberId } : ${msg.message } </p>
+	                				</div>
+	                			</div>
+	                		</c:if>
+	                		<c:if test="${msg.memberId != member.id}">
+	                			<div class='col-6'>
+	                				<div class='alert alert-warning'>
+	                					<p>${msg.memberId } : ${msg.message } </p>
+	                				</div>
+	                			</div>
+	                		</c:if>
+	                		
+	                		
+	                	</c:forEach>
+	                
+	                </div>
 	                <div class="col-6">
 	                    <div class="input-group mb-3" style="height: 50px;">
 	                        <input type="text" id="msg" class="form-control" style="border: 1px solid white; width: 90%;">

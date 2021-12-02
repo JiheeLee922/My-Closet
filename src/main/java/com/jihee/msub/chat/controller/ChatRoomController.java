@@ -35,10 +35,11 @@ public class ChatRoomController {
 //    }
 
     @GetMapping(value = "/room")
-    public String getRoom(Long chatRoomId, Principal pricipal, Model model){
+    public String getRoom(Long chatRoomId, @AuthenticationPrincipal MemberAdapter member, Model model){
 
+    	model.addAttribute("msg" ,chatService.getChatList(chatRoomId));
         model.addAttribute("chatRoomId", chatRoomId);
-        model.addAttribute("nickname", pricipal.getName());
+        model.addAttribute("member", member.getMember());
 
         return "chat/room";
     }
