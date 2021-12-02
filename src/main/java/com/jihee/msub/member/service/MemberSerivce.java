@@ -22,7 +22,8 @@ import org.springframework.validation.FieldError;
 import com.jihee.msub.member.domain.Role;
 import com.jihee.msub.member.domain.entity.MemberEntity;
 import com.jihee.msub.member.domain.repository.MemberRepository;
-import com.jihee.msub.member.dto.MemberDto;
+import com.jihee.msub.member.dto.MemberAdapter;
+import com.jihee.msub.member.dto.MemberDTO;
 
 import lombok.AllArgsConstructor;
 
@@ -33,7 +34,7 @@ public class MemberSerivce implements UserDetailsService{
 	private MemberRepository memberRepository;
 
 	@Transactional
-	public Long joinUser(MemberDto memberDto) {
+	public Long joinUser(MemberDTO memberDto) {
 		//비밀번호 암호화
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		memberDto.setPassword(passwordEncoder.encode(memberDto.getPassword())); 
@@ -45,8 +46,8 @@ public class MemberSerivce implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
 		
-		Optional<MemberEntity> userEntityWrapper = memberRepository.findByEmail(userEmail);
-		MemberEntity userEntity = userEntityWrapper.get();
+		MemberEntity userEntity = memberRepository.findByEmail(userEmail)
+									.orElseThrow(() -> new UsernameNotFoundException("존재하지 않는 계정입니다."));  
 		
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		
@@ -57,7 +58,7 @@ public class MemberSerivce implements UserDetailsService{
 		}
 		
 		//SpringSecurity에서 제공하는 UserDetails를 구현한 User 객체 반환. 
-		return new User(userEntity.getEmail(), userEntity.getPassword(), authorities);
+		return new MemberAdapter(userEntity, authorities);
 	}
 	
 	

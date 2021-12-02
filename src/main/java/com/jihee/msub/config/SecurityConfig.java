@@ -13,6 +13,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.jihee.msub.member.service.MemberSerivce;
+import com.jihee.msub.util.CustomLoginSuccessHandler;
 
 import lombok.AllArgsConstructor;
 
