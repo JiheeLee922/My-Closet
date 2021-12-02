@@ -19,7 +19,7 @@ import com.jihee.msub.member.domain.entity.MemberEntity;
 @Setter
 @ToString
 @NoArgsConstructor
-public class MemberDto {
+public class MemberDTO {
 
 	
 	private Long id;
@@ -37,6 +37,7 @@ public class MemberDto {
 	private String password;
 	//(?=.*[0-9]) 숫자 적어도 하나, (?=.*[a-zA-Z])영어 적어도 하나 , (?=.*\\W) 특문 적어도 하나, (?=\\S+$) 공백제거
 	
+	
 	private LocalDateTime createdDate;
 	
 	private LocalDateTime modifiedDate;
@@ -51,7 +52,7 @@ public class MemberDto {
 	}
 	
 	@Builder
-	public MemberDto(Long id, String email, String password, String nickname) {
+	public MemberDTO(Long id, String email, String password, String nickname) {
 		this.id = id;
 		this.nickname = nickname;
 		this.email = email;

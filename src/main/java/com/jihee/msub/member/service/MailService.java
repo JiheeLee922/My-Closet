@@ -5,7 +5,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import com.jihee.msub.member.dto.MailDto;
+import com.jihee.msub.member.dto.MailDTO;
 import com.jihee.msub.util.MailHandler;
 
 import lombok.NonNull;
@@ -22,7 +22,7 @@ public class MailService {
 	private String fromAddress;
 	
 	
-	public void mailSend( MailDto mailDto) {
+	public void mailSend( MailDTO mailDto) {
 //		SimpleMailMessage message = new SimpleMailMessage();
 //		message.setTo(mailDto.getAddress());
 //		message.setFrom(fromAddress);

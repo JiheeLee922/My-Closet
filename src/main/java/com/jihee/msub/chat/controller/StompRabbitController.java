@@ -9,6 +9,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
 
 import com.jihee.msub.chat.dto.ChatDTO;
+import com.jihee.msub.chat.service.ChatService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -23,6 +24,7 @@ public class StompRabbitController {
 	private final static String CHAT_TOPIC = "amq.topic";
 	private final static String CHAT_QUEUE_NAME = "chat.queue";
 	private static final String ROUTING_KEY = "room.";
+	private final ChatService chatService;
 	
 	
 	@MessageMapping("chat.enter.{chatRoomId}")
@@ -30,7 +32,7 @@ public class StompRabbitController {
 		//@DestinationVariable 은 Web에서 사용할 때 @PathVariable과 같은거. @MessageMapping일땐 이걸 쓴다.
 		
 		chat.setMessage("입장하셨습니다.");
-		chat.setRegDate(LocalDateTime.now()); 
+		//chat.setRegDate(LocalDateTime.now()); 
 		
 		template.convertAndSend(CHAT_TOPIC, ROUTING_KEY+ chatRoomId, chat); //Topic Destination
 		//template.convertAndSend( ROUTING_KEY+ chatRoomId, chat); //Queue Destination
@@ -40,9 +42,13 @@ public class StompRabbitController {
 	
 	@MessageMapping("chat.message.{chatRoomId}")
 	public void send(ChatDTO chat, @DestinationVariable String chatRoomId) {
-		chat.setRegDate(LocalDateTime.now());
+		//chat.setRegDate(LocalDateTime.now());
+		chat.setChatRoomId(Long.parseLong(chatRoomId)); 
+		chat.setMemberId(chat.getMemberId()); 
 		
 		template.convertAndSend(CHAT_TOPIC, ROUTING_KEY + chatRoomId, chat);
+		
+		chatService.saveChatMessage(chat); 
 	}
 	
 	

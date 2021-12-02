@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.jihee.msub.member.domain.entity.MemberEntity;
+import com.jihee.msub.util.TimeEntity;
 
 import lombok.AccessLevel;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package com.jihee.msub.config;
+package com.jihee.msub.util;
 
 import java.io.IOException;
 

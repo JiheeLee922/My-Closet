@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jihee.msub.board.dto.BoardDto;
+import com.jihee.msub.board.dto.BoardDTO;
 import com.jihee.msub.board.service.BoardService;
 
 import io.swagger.annotations.Api;
@@ -35,7 +35,7 @@ public class BoardController {
 	@ApiOperation(value = "게시판 리스트", notes = "게시판 목록입니다.")
 	@GetMapping("/list")
 	public String list(Model model, @ApiParam(value = "게시판페이지번호", required = true, example = "1") @RequestParam(value = "page", defaultValue = "1") Integer pageNum , @RequestParam(value = "keyword", required = false) String keyword) {
-		List<BoardDto> boardList = new ArrayList<>();
+		List<BoardDTO> boardList = new ArrayList<>();
 		boardList = boardService.getBoardListDsl(pageNum, keyword);
 		Integer[] pageList = boardService.getPageList(pageNum,keyword);
 		
@@ -51,14 +51,14 @@ public class BoardController {
     }
 
 	@PostMapping("/post")
-	public String write(BoardDto boardDto) {
+	public String write(BoardDTO boardDto) {
 		boardService.savePost(boardDto);
 		return "redirect:/board/list"; 
 	}
 	
 	@GetMapping("/post/{no}")
     public String detail(@PathVariable("no") Long no, Model model) {
-        BoardDto boardDTO = boardService.getPost(no);
+        BoardDTO boardDTO = boardService.getPost(no);
 
         model.addAttribute("boardDto", boardDTO);
         return "board/detail";
@@ -66,14 +66,14 @@ public class BoardController {
 
     @GetMapping("/post/edit/{no}")
     public String edit(@PathVariable("no") Long no, Model model) {
-        BoardDto boardDTO = boardService.getPost(no);
+        BoardDTO boardDTO = boardService.getPost(no);
 
         model.addAttribute("boardDto", boardDTO);
         return "board/update";
     }
 
     @PutMapping("/post/edit/{no}")
-    public String update(BoardDto boardDTO) {
+    public String update(BoardDTO boardDTO) {
     	boardService.savePost(boardDTO);
 
         return "redirect:/board/list";

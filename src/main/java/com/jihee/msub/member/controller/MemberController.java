@@ -11,8 +11,8 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.jihee.msub.member.dto.MailDto;
-import com.jihee.msub.member.dto.MemberDto;
+import com.jihee.msub.member.dto.MailDTO;
+import com.jihee.msub.member.dto.MemberDTO;
 import com.jihee.msub.member.service.MailService;
 import com.jihee.msub.member.service.MemberSerivce;
 
@@ -37,7 +37,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("/user/signup")
-	public String execSignup(@Valid MemberDto memberDto, Errors errors, Model model) {
+	public String execSignup(@Valid MemberDTO memberDto, Errors errors, Model model) {
 		if(errors.hasErrors()) {
 			//회원가입 유효성 실패 시, 입력 데이터 유지
 			model.addAttribute("userDto", memberDto);
@@ -90,7 +90,7 @@ public class MemberController {
 	
 	
 	@PostMapping("/mail")
-    public void execMail(MailDto mailDto) {
+    public void execMail(MailDTO mailDto) {
         mailService.mailSend(mailDto);
     }
 	

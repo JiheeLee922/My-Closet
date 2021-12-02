@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.jihee.msub.board.domain.entity.BoardEntity;
 import com.jihee.msub.board.domain.entity.QBoardEntity;
-import com.jihee.msub.board.dto.BoardDto;
+import com.jihee.msub.board.dto.BoardDTO;
 import com.jihee.msub.member.domain.entity.QMemberEntity;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.Tuple;
