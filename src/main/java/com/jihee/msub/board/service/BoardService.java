@@ -15,9 +15,9 @@ import org.springframework.stereotype.Service;
 import com.jihee.msub.board.domain.entity.BoardEntity;
 import com.jihee.msub.board.domain.repository.BoardRepository;
 import com.jihee.msub.board.domain.repository.search.SearchBoardRepositoryImpl;
-import com.jihee.msub.board.dto.BoardDto;
+import com.jihee.msub.board.dto.BoardDTO;
 import com.jihee.msub.member.domain.entity.MemberEntity;
-import com.jihee.msub.member.dto.MemberDto;
+import com.jihee.msub.member.dto.MemberDTO;
 
 import lombok.AllArgsConstructor;
 
@@ -34,7 +34,7 @@ public class BoardService {
     
     
 	@Transactional
-	public Long savePost(BoardDto boardDto) {
+	public Long savePost(BoardDTO boardDto) {
 		return boardRepository.save(boardDto.toEntity()).getId();
 	}
 	
@@ -46,7 +46,7 @@ public class BoardService {
 	* </pre>
 	*/
 	@Transactional
-	public List<BoardDto> getBoardList(Integer pageNum, String keyword){
+	public List<BoardDTO> getBoardList(Integer pageNum, String keyword){
 		
 		Page<BoardEntity> page = null;
 		if(keyword == null) {
@@ -56,7 +56,7 @@ public class BoardService {
 		}
 		
 		List<BoardEntity> boardEntites =  page.getContent();
-		List<BoardDto> boardDtoList = new ArrayList<>();
+		List<BoardDTO> boardDtoList = new ArrayList<>();
 		
 		for (BoardEntity boardEntity : boardEntites) {
             boardDtoList.add(this.convertEntityToDto(boardEntity));
@@ -74,12 +74,12 @@ public class BoardService {
 	* </pre>
 	*/
 	@Transactional
-	public List<BoardDto> getBoardListDsl(Integer pageNum, String keyword){
+	public List<BoardDTO> getBoardListDsl(Integer pageNum, String keyword){
 		
 		Pageable pageable = PageRequest.of(0, 5, Sort.Direction.ASC, "writer");
 		
 		Page<Object[]> result = searchBoardRepository.searchBoard(pageable, "가", "t");
-		List<BoardDto> boardDtoList = new ArrayList<>();
+		List<BoardDTO> boardDtoList = new ArrayList<>();
 		
 //		result.stream().forEach( o -> {
 //			System.out.println(Arrays.toString(o));
@@ -89,10 +89,10 @@ public class BoardService {
 		
 		
 		for(Object[] board: boardList) {
-			BoardDto b = this.convertEntityToDto((BoardEntity)board[0]);
+			BoardDTO b = this.convertEntityToDto((BoardEntity)board[0]);
 			
 			MemberEntity member = (MemberEntity)board[1];
-			MemberDto memberDto =  MemberDto.builder()
+			MemberDTO memberDto =  MemberDTO.builder()
 			.id(member.getId())
 			.email(member.getEmail())
 			.nickname(member.getEmail())
@@ -107,11 +107,11 @@ public class BoardService {
 	
 	
 	@Transactional
-    public BoardDto getPost(Long id) {
+    public BoardDTO getPost(Long id) {
         Optional<BoardEntity> boardEntityWrapper = boardRepository.findById(id);
         BoardEntity boardEntity = boardEntityWrapper.get();
 
-        BoardDto boardDTO = BoardDto.builder()
+        BoardDTO boardDTO = BoardDTO.builder()
                 .id(boardEntity.getId())
                 .title(boardEntity.getTitle())
                 .content(boardEntity.getContent())
@@ -161,8 +161,8 @@ public class BoardService {
     	return pageList;
     }
     
-    private BoardDto convertEntityToDto(BoardEntity entity) {
-    	return BoardDto.builder()
+    private BoardDTO convertEntityToDto(BoardEntity entity) {
+    	return BoardDTO.builder()
     			.id(entity.getId())
     			.title(entity.getTitle())
     			.content(entity.getContent())
